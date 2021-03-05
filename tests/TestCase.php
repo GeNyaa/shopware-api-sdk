@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ShopWorks\ShopwareSApiSdk\Tests;
+namespace ShopWorks\ShopwareApiSdk\Tests;
 
 use \Orchestra\Testbench\TestCase as ParentTestCase;
+use ShopWorks\ShopwareApiSdk\ShopwareApiClient;
 use ShopWorks\ShopwareApiSdk\ShopwareApiSdkServiceProvider;
 
 

@@ -2,14 +2,13 @@
 
 namespace ShopWorks\ShopwareApiSdk\Tests\Feature;
 
-use Tests\TestCase;
+use ShopWorks\ShopwareApiSdk\ShopwareApiClient;
+use ShopWorks\ShopwareApiSdk\Tests\TestCase;
 
 class Test extends TestCase
 {
-    public function testBasic()
+    public function testBasic(): void
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $shopware = new ShopwareApiClient();
     }
 }

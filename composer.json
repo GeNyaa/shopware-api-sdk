@@ -1,5 +1,5 @@
 {
-    "name": "shopworks/shopware-api-sdk",
+    "name": "genyaa/shopware-api-sdk",
     "description": "Laravel package for the shopware API.",
     "type": "library",
     "license": "MIT",
@@ -11,12 +11,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "ShopWorks\\ShopwareApiSdk\\": "src"
+            "GeNyaa\\ShopwareApiSdk\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ShopWorks\\ShopwareApiSdk\\Tests\\": "tests"
+            "GeNyaa\\ShopwareApiSdk\\Tests\\": "tests"
         }
     },
     "extra": {
