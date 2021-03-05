@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 
-namespace ShopWorks\ShopwareApiSdk\Dto;
+namespace GeNyaa\ShopwareApiSdk\Dto;
 
-use ShopWorks\ShopwareApiSdk\Dto\Arrayable;
+use GeNyaa\ShopwareApiSdk\Dto\Arrayable;
 
 class Header implements Arrayable
 {

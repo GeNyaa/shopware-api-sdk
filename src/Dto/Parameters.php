@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 
-namespace ShopWorks\ShopwareApiSdk\Dto;
+namespace GeNyaa\ShopwareApiSdk\Dto;
 
 
-use ShopWorks\ShopwareApiSdk\ShopwareApiClient;
+use GeNyaa\ShopwareApiSdk\ShopwareApiClient;
 
 class Parameters implements Arrayable
 {

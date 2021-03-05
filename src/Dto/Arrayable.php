@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace ShopWorks\ShopwareApiSdk\Dto;
+namespace GeNyaa\ShopwareApiSdk\Dto;
 
 use Illuminate\Contracts\Support\Arrayable as IArrayable;
 

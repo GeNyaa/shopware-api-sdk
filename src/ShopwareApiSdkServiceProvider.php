@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ShopWorks\ShopwareApiSdk;
+namespace GeNyaa\ShopwareApiSdk;
 
 use Illuminate\Support\ServiceProvider;
-use ShopWorks\ShopwareApiSdk\Endpoints\EndpointAbstract;
+use GeNyaa\ShopwareApiSdk\Endpoints\EndpointAbstract;
 
 class ShopwareApiSdkServiceProvider extends ServiceProvider
 {

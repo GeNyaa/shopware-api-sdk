@@ -3,15 +3,15 @@
 declare(strict_types=1);
 
 
-namespace ShopWorks\ShopwareApiSdk\Endpoints;
+namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
 use Illuminate\Support\Collection;
 use Response;
-use ShopWorks\ShopwareApiSdk\Dto\Header;
-use ShopWorks\ShopwareApiSdk\Dto\Parameters;
-use ShopWorks\ShopwareApiSdk\Exceptions\ShopwareApiException;
-use ShopWorks\ShopwareApiSdk\ShopwareApiClient;
+use GeNyaa\ShopwareApiSdk\Dto\Header;
+use GeNyaa\ShopwareApiSdk\Dto\Parameters;
+use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
+use GeNyaa\ShopwareApiSdk\ShopwareApiClient;
 
 abstract class EndpointAbstract
 {

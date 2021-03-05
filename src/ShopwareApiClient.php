@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace ShopWorks\ShopwareApiSdk;
+namespace GeNyaa\ShopwareApiSdk;
 
 use Carbon\Carbon;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use ShopWorks\ShopwareApiSdk\Dto\Header;
-use ShopWorks\ShopwareApiSdk\Dto\Parameters;
-use ShopWorks\ShopwareApiSdk\Endpoints\ProductEndpoint;
+use GeNyaa\ShopwareApiSdk\Dto\Header;
+use GeNyaa\ShopwareApiSdk\Dto\Parameters;
+use GeNyaa\ShopwareApiSdk\Endpoints\ProductEndpoint;
 
 class ShopwareApiClient
 {

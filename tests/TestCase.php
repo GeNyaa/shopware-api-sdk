@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ShopWorks\ShopwareApiSdk\Tests;
+namespace GeNyaa\ShopwareApiSdk\Tests;
 
 use \Orchestra\Testbench\TestCase as ParentTestCase;
-use ShopWorks\ShopwareApiSdk\ShopwareApiClient;
-use ShopWorks\ShopwareApiSdk\ShopwareApiSdkServiceProvider;
+use GeNyaa\ShopwareApiSdk\ShopwareApiClient;
+use GeNyaa\ShopwareApiSdk\ShopwareApiSdkServiceProvider;
 
 
 class TestCase extends ParentTestCase

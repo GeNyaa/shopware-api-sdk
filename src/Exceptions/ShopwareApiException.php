@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace ShopWorks\ShopwareApiSdk\Exceptions;
+namespace GeNyaa\ShopwareApiSdk\Exceptions;
 
 use Exception;
 

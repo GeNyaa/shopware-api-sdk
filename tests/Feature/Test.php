@@ -1,9 +1,9 @@
 <?php
 
-namespace ShopWorks\ShopwareApiSdk\Tests\Feature;
+namespace GeNyaa\ShopwareApiSdk\Tests\Feature;
 
-use ShopWorks\ShopwareApiSdk\ShopwareApiClient;
-use ShopWorks\ShopwareApiSdk\Tests\TestCase;
+use GeNyaa\ShopwareApiSdk\ShopwareApiClient;
+use GeNyaa\ShopwareApiSdk\Tests\TestCase;
 
 class Test extends TestCase
 {
