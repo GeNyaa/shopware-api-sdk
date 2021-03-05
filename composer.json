@@ -1,0 +1,40 @@
+{
+    "name": "shopworks/shopware-api-sdk",
+    "description": "Laravel package for the shopware API.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Auke de Jong",
+            "email": "contact@genyaa.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ShopWorks\\ShopwareApiSdk\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ShopWorks\\ShopwareApiSdk\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ShopWorks\\ShopwareApiSdk\\ShopwareApiSdkServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "nesbot/carbon": "^2.45",
+        "illuminate/support": "^8.29",
+        "guzzlehttp/guzzle": "^7.2",
+        "illuminate/contracts": "^8.29"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.5"
+    }
+}
