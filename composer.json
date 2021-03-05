@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ShopWorks\\ShopwareApiSdk\\ShopwareApiSdkServiceProvider"
+                "GeNyaa\\ShopwareApiSdk\\ShopwareApiSdkServiceProvider"
             ]
         }
     },
