@@ -26,7 +26,7 @@ abstract class EndpointAbstract
     /**
      * @throws ShopwareApiException
      */
-    public function all(): array
+    public function all(): Collection
     {
         $response = $this->client->performGetRequest(
             $this->resourcePath,
@@ -37,6 +37,6 @@ abstract class EndpointAbstract
             throw new ShopwareApiException($response);
         }
 
-        return $response->json();
+        return new Collection($response->json()->collection);
     }
 }
