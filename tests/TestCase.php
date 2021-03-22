@@ -4,18 +4,13 @@ declare(strict_types=1);
 
 namespace GeNyaa\ShopwareApiSdk\Tests;
 
-use \Orchestra\Testbench\TestCase as ParentTestCase;
+use Orchestra\Testbench\TestCase as ParentTestCase;
 use GeNyaa\ShopwareApiSdk\ShopwareApiClient;
 use GeNyaa\ShopwareApiSdk\ShopwareApiSdkServiceProvider;
 
 
 class TestCase extends ParentTestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
     protected function getPackageProviders($app): array
     {
         return [

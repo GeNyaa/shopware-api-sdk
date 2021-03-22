@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "code": "6",
+      "status": "401",
+      "title": "The user credentials were incorrect.",
+      "detail": null
+    }
+  ]
+}

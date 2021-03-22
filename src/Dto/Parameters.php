@@ -14,9 +14,6 @@ class Parameters implements Arrayable
         public array $parameters = []
     )
     {
-        $this->parameters = array_merge($this->parameters, [
-            'limit' => ShopwareApiClient::PAGE_LIMIT
-        ]);
     }
 
     public function set(string $key, mixed $value): self

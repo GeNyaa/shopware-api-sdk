@@ -15,10 +15,9 @@ use GeNyaa\ShopwareApiSdk\Endpoints\ProductEndpoint;
 
 class ShopwareApiClient
 {
-    private string $domain;
-    private ?string $bearer;
-    private ?Carbon $expiresTime;
-    public const PAGE_LIMIT = 500;
+    public string $domain;
+    public ?string $bearer;
+    public ?Carbon $expiresTime;
 
     public ProductEndpoint $product;
 
@@ -47,7 +46,8 @@ class ShopwareApiClient
             'grant_type' => 'client_credentials',
             'client_id' => config('shopware.client_id'),
             'client_secret' => config('shopware.client_secret'),
-        ])->onError(function () {
+        ])->onError(function ($exception) {
+            dump($exception);
             throw new ShopwareApiAuthenticationException('client_id and/or client_secret are not authorized to access this domain.');
         });
 

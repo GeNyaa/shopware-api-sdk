@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "code": "2",
+      "status": "400",
+      "title": "The authorization grant type is not supported by the authorization server.",
+      "detail": "Check that all required parameters have been provided"
+    }
+  ]
+}
