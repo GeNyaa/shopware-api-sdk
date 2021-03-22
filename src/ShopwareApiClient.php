@@ -19,14 +19,10 @@ class ShopwareApiClient
     public ?string $bearer;
     public ?Carbon $expiresTime;
 
-    public ProductEndpoint $product;
-
     public function __construct()
     {
         $this->domain = config('shopware.url');
         $this->getBearerToken();
-
-        $this->product = app(ProductEndpoint::class);
     }
 
     public function checkBearer(): void
@@ -66,7 +62,7 @@ class ShopwareApiClient
         return Http::withToken($this->bearer)
             ->withHeaders($header->toArray())
             ->get(
-                sprintf('%Exceptions%Exceptions',
+                sprintf('%s/%s',
                     $this->domain,
                     $uri
                 ),
