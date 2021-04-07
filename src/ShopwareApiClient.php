@@ -15,12 +15,14 @@ use GeNyaa\ShopwareApiSdk\Endpoints\ProductEndpoint;
 
 class ShopwareApiClient
 {
+    public Http $http;
     public string $domain;
     public ?string $bearer;
     public ?Carbon $expiresTime;
 
-    public function __construct()
+    public function __construct(Http $http)
     {
+        $this->http = $http;
         $this->domain = config('shopware.url');
         $this->getBearerToken();
     }
@@ -38,12 +40,11 @@ class ShopwareApiClient
     private function getBearerToken(): void
     {
         $currentTime = Carbon::now();
-        $response = Http::post($this->domain . '/api/oauth/token', [
+        $response = $this->http::post($this->domain . '/api/oauth/token', [
             'grant_type' => 'client_credentials',
             'client_id' => config('shopware.client_id'),
             'client_secret' => config('shopware.client_secret'),
         ])->onError(function ($exception) {
-            dump($exception);
             throw new ShopwareApiAuthenticationException('client_id and/or client_secret are not authorized to access this domain.');
         });
 
@@ -59,7 +60,7 @@ class ShopwareApiClient
             $header = new Header();
         }
 
-        return Http::withToken($this->bearer)
+        return $this->http::withToken($this->bearer)
             ->withHeaders($header->toArray())
             ->get(
                 sprintf('%s/%s',

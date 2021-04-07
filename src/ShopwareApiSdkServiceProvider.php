@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GeNyaa\ShopwareApiSdk;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
 use GeNyaa\ShopwareApiSdk\Endpoints\EndpointAbstract;
 
@@ -13,6 +14,7 @@ class ShopwareApiSdkServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'shopware');
         $this->app->bind(EndpointAbstract::class, ShopwareApiClient::class);
+        $this->app->bind(ShopwareApiClient::class, Http::class);
     }
 
     public function boot(): void
