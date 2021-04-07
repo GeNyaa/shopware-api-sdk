@@ -6,15 +6,35 @@ use Carbon\Carbon;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiAuthenticationException;
 use GeNyaa\ShopwareApiSdk\ShopwareApiClient;
 use GeNyaa\ShopwareApiSdk\Tests\TestCase;
-use GuzzleHttp\Handler\MockHandler;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
-use Mockery;
 
-class Test extends TestCase
+class OauthTest extends TestCase
 {
-    public function testExample(): void
+    public function testBadRequest(): void
+    {
+        Http::fake([
+            'shopware.com/api/oauth/token' => Http::response(File::get(__DIR__ . '/../Data/Oauth/Token/400.json'), Response::HTTP_BAD_REQUEST),
+        ]);
+
+        $this->expectException(ShopwareApiAuthenticationException::class);
+
+        $shopware = app(ShopwareApiClient::class);
+    }
+
+    public function testUnauthorized(): void
+    {
+        Http::fake([
+            'shopware.com/api/oauth/token' => Http::response(File::get(__DIR__ . '/../Data/Oauth/Token/401.json'), Response::HTTP_UNAUTHORIZED),
+        ]);
+
+        $this->expectException(ShopwareApiAuthenticationException::class);
+
+        $shopware = app(ShopwareApiClient::class);
+    }
+
+    public function testSuccessful(): void
     {
         Http::fake([
             'shopware.com/api/oauth/token' => Http::response(File::get(__DIR__ . '/../Data/Oauth/Token/200.json'), Response::HTTP_OK),
