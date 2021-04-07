@@ -14,7 +14,9 @@ class ShopwareApiSdkServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'shopware');
         $this->app->bind(EndpointAbstract::class, ShopwareApiClient::class);
-        $this->app->bind(ShopwareApiClient::class, Http::class);
+        $this->app->bind(ShopwareApiClient::class, function ($app) {
+            return new ShopwareApiClient($app->make(Http::class));
+        });
     }
 
     public function boot(): void
