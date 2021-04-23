@@ -19,6 +19,30 @@ class Header implements Arrayable
         ]);
     }
 
+    public function set(string $key, string $value): self
+    {
+        $this->headers[$key] = $value;
+
+        return $this;
+    }
+
+    public function get(string $key): ?string
+    {
+        return $this->headers[$key];
+    }
+
+    public function setLanguage(string $id): self
+    {
+        $this->set('sw-language-id', $id);
+
+        return $this;
+    }
+
+    public function getLanguage(): ?string
+    {
+        return $this->get('sw-language-id');
+    }
+
     public function toArray(): array
     {
         return $this->headers;

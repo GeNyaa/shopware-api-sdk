@@ -5,12 +5,14 @@ namespace GeNyaa\ShopwareApiSdk\Tests\Feature;
 use Carbon\Carbon;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiAuthenticationException;
 use GeNyaa\ShopwareApiSdk\ShopwareApiClient;
+use GeNyaa\ShopwareApiSdk\ShopwareApiSdkServiceProvider;
 use GeNyaa\ShopwareApiSdk\Tests\TestCase;
+use Orchestra\Testbench\TestCase as ParentTestCase;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 
-class OauthTest extends TestCase
+class OauthTest extends ParentTestCase
 {
     public function testBadRequest(): void
     {
@@ -45,5 +47,12 @@ class OauthTest extends TestCase
         self::assertEquals('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0', $shopware->bearer);
         self::assertEquals('http://shopware.com', $shopware->domain);
         self::assertInstanceOf(Carbon::class, $shopware->expiresTime);
+    }
+
+    protected function getPackageProviders($app): array
+    {
+        return [
+            ShopwareApiSdkServiceProvider::class,
+        ];
     }
 }

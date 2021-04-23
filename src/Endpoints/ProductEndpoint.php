@@ -13,6 +13,8 @@ class ProductEndpoint extends EndpointAbstract
 {
     protected string $resourcePath = '/api/v3/product';
 
+    protected string $resource = 'product';
+
     public function all(): Collection
     {
         return parent::all()->mapInto(Product::class);

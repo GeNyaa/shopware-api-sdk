@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk;
 
 use Carbon\Carbon;
+use GeNyaa\ShopwareApiSdk\Dto\Arrayable;
+use GeNyaa\ShopwareApiSdk\Endpoints\CategoryEndpoint;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiAuthenticationException;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 use Illuminate\Http\Client\Response;
@@ -20,11 +22,21 @@ class ShopwareApiClient
     public ?string $bearer;
     public ?Carbon $expiresTime;
 
+    public CategoryEndpoint $category;
+    public ProductEndpoint $product;
+
     public function __construct(Http $http)
     {
         $this->http = $http;
         $this->domain = config('shopware.url');
         $this->getBearerToken();
+        $this->initializeEndpoints();
+    }
+
+    public function initializeEndpoints(): void
+    {
+        $this->category = new CategoryEndpoint($this);
+        $this->product = new ProductEndpoint($this);
     }
 
     public function checkBearer(): void
@@ -54,7 +66,28 @@ class ShopwareApiClient
         $this->expiresTime = $currentTime->addSeconds($data['expires_in'] ?? 0);
     }
 
-    public function performGetRequest(string $uri, Parameters $parameters, Header $header = null): Response
+    public function performGetRequest(string $uri, Parameters $parameters = null, Header $header = null): Response
+    {
+        if (is_null($header)) {
+            $header = new Header();
+        }
+
+        if (is_null($parameters)) {
+            $parameters = new Parameters();
+        }
+
+        return $this->http::withToken($this->bearer)
+            ->withHeaders($header->toArray())
+            ->get(
+                sprintf('%s%s',
+                    $this->domain,
+                    $uri
+                ),
+                $parameters->toArray()
+            );
+    }
+
+    public function performSyncRequest(array $data, Header $header = null): Response
     {
         if (is_null($header)) {
             $header = new Header();
@@ -62,12 +95,11 @@ class ShopwareApiClient
 
         return $this->http::withToken($this->bearer)
             ->withHeaders($header->toArray())
-            ->get(
-                sprintf('%s/%s',
-                    $this->domain,
-                    $uri
+            ->post(
+                sprintf('%s/api/_action/sync',
+                    $this->domain
                 ),
-                $parameters->toArray()
+                $data,
             );
     }
 }
