@@ -16,13 +16,28 @@ class Currency implements Arrayable
         public string $symbol,
         public int|float $factor,
         public int $decimalPrecision,
+        public ?array $translations = null,
     )
     {
     }
 
     public function toArray(): array
     {
-        return []; // TODO: Implement toArray() method.
+        $currency = [
+            'id' => $this->id,
+            'name' => $this->name,
+            'shortName' => $this->shortName,
+            'isoCode' => $this->isoCode,
+            'symbol' => $this->symbol,
+            'factor' => $this->factor,
+            'decimalPrecision' => $this->decimalPrecision,
+        ];
+
+        if(!is_null($this->translations)) {
+            $currency['translations'] = $this->translations;
+        }
+
+        return $currency; // TODO: Implement toArray() method.
     }
 
 }

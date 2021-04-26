@@ -20,7 +20,7 @@ class LanguageEndpoint extends EndpointAbstract
 
         return is_null($language) ? null : $this->mapInto($language);
     }
-    private function mapInto(array $language): Language
+    public function mapInto(array $language): Language
     {
         return new Language(
             $category['id'],

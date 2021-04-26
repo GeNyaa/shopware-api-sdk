@@ -30,7 +30,7 @@ class CategoryEndpoint extends EndpointAbstract
         return is_null($category) ? null : $this->mapInto($category);
     }
 
-    private function mapInto(array $category): Category
+    public function mapInto(array $category): Category
     {
         return new Category(
             $category['id'],

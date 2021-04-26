@@ -21,7 +21,7 @@ class CurrencyEndpoint extends EndpointAbstract
         return is_null($currency) ? null : $this->mapInto($currency);
     }
 
-    private function mapInto(array $currency): Currency
+    public function mapInto(array $currency): Currency
     {
         return new Currency(
             $currency['id'],

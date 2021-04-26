@@ -22,7 +22,7 @@ class TaxEndpoint extends EndpointAbstract
         return is_null($tax) ? null : $this->mapInto($tax);
     }
 
-    private function mapInto(array $tax): Tax
+    public function mapInto(array $tax): Tax
     {
         return new Tax(
             $tax['id'],

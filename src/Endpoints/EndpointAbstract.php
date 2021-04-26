@@ -69,11 +69,11 @@ abstract class EndpointAbstract
             $this->parameters = new Parameters();
         }
 
-        $this->parameters = $this->parameters->set('limit', 1);
+        $parameters = $this->parameters->set('limit', 1);
 
         $response = $this->client->performGetRequest(
             $this->resourcePath,
-            $this->parameters,
+            $parameters,
             $this->header,
         );
 
@@ -109,7 +109,9 @@ abstract class EndpointAbstract
             ]
         ];
 
-        $response = $this->client->performSyncRequest($data);
+
+
+        $response = $this->client->performSyncRequest($data, $this->header);
 
         if ($response->failed()) {
             throw new ShopwareApiException($response->body());

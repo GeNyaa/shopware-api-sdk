@@ -18,6 +18,7 @@ class Product implements Arrayable
         public ?string $productNumber,
         public int $stock,
         public bool $active,
+        public int|float|null $purchaseUnit = null,
         public ?Collection $categories = null,
         public ?Collection $customFields = null,
         public ?Collection $properties = null,

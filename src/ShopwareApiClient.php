@@ -10,6 +10,7 @@ use GeNyaa\ShopwareApiSdk\Endpoints\CategoryEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\CurrencyEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\LanguageEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\PropertyEndpoint;
+use GeNyaa\ShopwareApiSdk\Endpoints\PropertyOptionEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\TaxEndpoint;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiAuthenticationException;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
@@ -32,6 +33,7 @@ class ShopwareApiClient
     public LanguageEndpoint $language;
     public CurrencyEndpoint $currency;
     public PropertyEndpoint $property;
+    public PropertyOptionEndpoint $propertyOption;
 
     public function __construct(Http $http)
     {
@@ -49,6 +51,7 @@ class ShopwareApiClient
         $this->language = new LanguageEndpoint($this);
         $this->currency = new CurrencyEndpoint($this);
         $this->property = new PropertyEndpoint($this);
+        $this->propertyOption = new PropertyOptionEndpoint($this);
     }
 
     public function checkBearer(): void
