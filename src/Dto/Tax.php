@@ -18,6 +18,10 @@ class Tax implements Arrayable
 
     public function toArray(): array
     {
-        return []; // TODO: Implement toArray() method.
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'taxRate' => $this->taxRate,
+        ];
     }
 }
