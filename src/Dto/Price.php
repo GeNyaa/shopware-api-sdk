@@ -18,6 +18,18 @@ class Price implements Arrayable
 
     public function toArray(): array
     {
-        return []; // TODO: Implement toArray() method.
+        $price = [
+            'currencyId' => $this->currencyId,
+        ];
+
+        if (!is_null($this->net)) {
+            $price['net'] = $this->net;
+        }
+
+        if (!is_null($this->gross)) {
+            $price['gross'] = $this->gross;
+        }
+
+        return $price;
     }
 }

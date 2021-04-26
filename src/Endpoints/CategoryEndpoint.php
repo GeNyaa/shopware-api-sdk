@@ -23,7 +23,7 @@ class CategoryEndpoint extends EndpointAbstract
         return parent::all()->mapInto(Category::class);
     }
 
-    public  function first(): ?Category
+    public function first(): ?Category
     {
         $category = parent::first();
 

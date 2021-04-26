@@ -7,6 +7,10 @@ namespace GeNyaa\ShopwareApiSdk;
 use Carbon\Carbon;
 use GeNyaa\ShopwareApiSdk\Dto\Arrayable;
 use GeNyaa\ShopwareApiSdk\Endpoints\CategoryEndpoint;
+use GeNyaa\ShopwareApiSdk\Endpoints\CurrencyEndpoint;
+use GeNyaa\ShopwareApiSdk\Endpoints\LanguageEndpoint;
+use GeNyaa\ShopwareApiSdk\Endpoints\PropertyEndpoint;
+use GeNyaa\ShopwareApiSdk\Endpoints\TaxEndpoint;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiAuthenticationException;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 use Illuminate\Http\Client\Response;
@@ -24,6 +28,10 @@ class ShopwareApiClient
 
     public CategoryEndpoint $category;
     public ProductEndpoint $product;
+    public TaxEndpoint $tax;
+    public LanguageEndpoint $language;
+    public CurrencyEndpoint $currency;
+    public PropertyEndpoint $property;
 
     public function __construct(Http $http)
     {
@@ -37,6 +45,10 @@ class ShopwareApiClient
     {
         $this->category = new CategoryEndpoint($this);
         $this->product = new ProductEndpoint($this);
+        $this->tax = new TaxEndpoint($this);
+        $this->language = new LanguageEndpoint($this);
+        $this->currency = new CurrencyEndpoint($this);
+        $this->property = new PropertyEndpoint($this);
     }
 
     public function checkBearer(): void
