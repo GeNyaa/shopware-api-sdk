@@ -8,8 +8,22 @@ namespace GeNyaa\ShopwareApiSdk\Dto;
 
 class Language implements Arrayable
 {
- public function toArray(): array
- {
-     return []; // TODO: Implement toArray() method.
- }
+    public function __construct(
+        public string $id,
+        public string $name,
+        public string $isoCode,
+        public string $locale,
+    )
+    {
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'isoCode' => $this->isoCode,
+            'locale' => $this->locale,
+        ];
+    }
 }

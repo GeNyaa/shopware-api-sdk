@@ -19,4 +19,9 @@ class ProductEndpoint extends EndpointAbstract
     {
         return parent::all()->mapInto(Product::class);
     }
+
+    public function mapInto(array $array)
+    {
+        // TODO: Implement mapInto() method.
+    }
 }

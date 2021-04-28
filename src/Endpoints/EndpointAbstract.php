@@ -15,15 +15,15 @@ use GeNyaa\ShopwareApiSdk\Dto\Parameters;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 use GeNyaa\ShopwareApiSdk\ShopwareApiClient;
 
-abstract class EndpointAbstract
+abstract class EndpointAbstract implements EndpointInterface
 {
     protected string $resourcePath;
 
     protected string $resource;
 
-    public Parameters|null $parameters = null;
+    public ?Parameters $parameters = null;
 
-    public Header|null $header = null;
+    public ?Header $header = null;
 
     public function __construct(
         protected ShopwareApiClient $client
@@ -60,7 +60,13 @@ abstract class EndpointAbstract
             throw new ShopwareApiException($response->body());
         }
 
-        return new Collection($response->json()['data']);
+        if (is_null($response->json()['data'])) {
+            return collect();
+        }
+
+        return collect($response->json()['data'])->map(function (array $data) {
+            return $this->mapInto($data);
+        });
     }
 
     public function first()
@@ -108,8 +114,6 @@ abstract class EndpointAbstract
                 'payload' => $upsertable
             ]
         ];
-
-
 
         $response = $this->client->performSyncRequest($data, $this->header);
 

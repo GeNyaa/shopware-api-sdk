@@ -13,7 +13,7 @@ class Property implements Arrayable
     public function __construct(
         public string $id,
         public string $name,
-        public ?string $description,
+        public ?string $description = null,
         public ?int $position,
         public bool $filterable,
         public ?Collection $options,
