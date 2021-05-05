@@ -20,8 +20,21 @@ class ProductEndpoint extends EndpointAbstract
         return parent::all()->mapInto(Product::class);
     }
 
-    public function mapInto(array $array)
+    public function mapInto(array $product): Product
     {
-        // TODO: Implement mapInto() method.
+        return new Product(
+            $product['id'],
+            $product['name'],
+            $product['taxId'],
+            $product['price'],
+            $product['productNumber'],
+            $product['stock'],
+            $product['active'],
+            $product['purchaseUnit'],
+            $product['manufacturerId'],
+            collect($product['categories']),
+            $product['customFields'],
+            collect($product['properties']),
+        );
     }
 }

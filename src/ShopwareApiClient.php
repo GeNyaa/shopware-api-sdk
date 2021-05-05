@@ -24,9 +24,11 @@ use GeNyaa\ShopwareApiSdk\Endpoints\ProductEndpoint;
 class ShopwareApiClient
 {
     public Http $http;
-    public string $domain;
-    public ?string $bearer;
-    public ?Carbon $expiresTime;
+    protected string $domain;
+    protected ?string $bearer;
+    protected string $clientId;
+    protected string $clientSecret;
+    protected ?Carbon $expiresTime;
 
     public CategoryEndpoint $category;
     public ProductEndpoint $product;
@@ -41,8 +43,24 @@ class ShopwareApiClient
     {
         $this->http = $http;
         $this->domain = config('shopware.url');
-        $this->getBearerToken();
+        $this->clientId = config('shopware.client_id');
+        $this->clientSecret = config('shopware.client_secret');
         $this->initializeEndpoints();
+    }
+
+    public function setDomain(string $domain): self
+    {
+        $this->domain = $domain;
+
+        return $this;
+    }
+
+    public function setClientCredentials(string $clientId, string $clientSecret): self
+    {
+        $this->clientId = $clientId;
+        $this->clientSecret = $clientSecret;
+
+        return $this;
     }
 
     public function initializeEndpoints(): void
@@ -72,9 +90,9 @@ class ShopwareApiClient
         $currentTime = Carbon::now();
         $response = $this->http::post($this->domain . '/api/oauth/token', [
             'grant_type' => 'client_credentials',
-            'client_id' => config('shopware.client_id'),
-            'client_secret' => config('shopware.client_secret'),
-        ])->onError(function ($exception) {
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+        ])->onError(function () {
             throw new ShopwareApiAuthenticationException('client_id and/or client_secret are not authorized to access this domain.');
         });
 

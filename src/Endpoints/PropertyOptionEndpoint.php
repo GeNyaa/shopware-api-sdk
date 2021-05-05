@@ -18,17 +18,11 @@ class PropertyOptionEndpoint extends EndpointAbstract
 
     protected string $resource = 'property_group_option';
 
-    public function first(): ?Property
+    public function first(): ?PropertyOption
     {
         $propertyOption = parent::first();
 
-        if (is_null($propertyOption)) {
-            return null;
-        }
-
-        $property['options'] = $this->getOptions($propertyOption['id']);
-
-        return $this->mapInto($propertyOption);
+        return is_null($propertyOption) ? null : $this->mapInto($propertyOption);
     }
 
     public function mapInto(array $propertyOption): PropertyOption
