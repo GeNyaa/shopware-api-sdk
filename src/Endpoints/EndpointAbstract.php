@@ -60,13 +60,38 @@ abstract class EndpointAbstract implements EndpointInterface
             throw new ShopwareApiException($response->body());
         }
 
-        if (is_null($response->json()['data'])) {
+        $data = $response->json();
+
+        if (is_null($data['data'])) {
             return collect();
         }
 
-        return collect($response->json()['data'])->map(function (array $data) {
+        $return = collect($data['data'])->map(function (array $data) {
             return $this->mapInto($data);
         });
+
+        while ($this->parameters->get('total-count-mode') === Parameters::COUNT_MODE_NEXT_PAGE && $data['total'] > 0) {
+            $this->parameters->setPage($this->parameters->getPage() + 1);
+            $response = $this->client->performGetRequest(
+                $this->resourcePath,
+                $this->parameters,
+                $this->header,
+            );
+
+            if ($response->failed()) {
+                throw new ShopwareApiException($response->body());
+            }
+
+            $data = $response->json();
+
+            $return = $return->merge(
+                collect($data['data'])->map(function (array $data) {
+                    return $this->mapInto($data);
+                })
+            );
+        }
+
+        return $return;
     }
 
     public function first()
