@@ -41,8 +41,8 @@ class ShopwareApiClient
 
     public function __construct(Http $http)
     {
-        $this->http = $http;
         $this->domain = config('shopware.url');
+        $this->http = $http->baseUrl($this->domain);
         $this->clientId = config('shopware.client_id');
         $this->clientSecret = config('shopware.client_secret');
         $this->initializeEndpoints();
@@ -51,6 +51,7 @@ class ShopwareApiClient
     public function setDomain(string $domain): self
     {
         $this->domain = $domain;
+        $this->http->baseUrl($this->domain);
 
         return $this;
     }
@@ -88,7 +89,7 @@ class ShopwareApiClient
     private function getBearerToken(): void
     {
         $currentTime = Carbon::now();
-        $response = $this->http::post($this->domain . '/api/oauth/token', [
+        $response = $this->http::post('/api/oauth/token', [
             'grant_type' => 'client_credentials',
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
@@ -114,13 +115,7 @@ class ShopwareApiClient
 
         return $this->http::withToken($this->bearer)
             ->withHeaders($header->toArray())
-            ->get(
-                sprintf('%s%s',
-                    $this->domain,
-                    $uri
-                ),
-                $parameters->toArray()
-            );
+            ->get($uri, $parameters->toArray());
     }
 
     public function performSyncRequest(array $data, Header $header = null): Response
@@ -131,11 +126,6 @@ class ShopwareApiClient
 
         return $this->http::withToken($this->bearer)
             ->withHeaders($header->toArray())
-            ->post(
-                sprintf('%s/api/_action/sync',
-                    $this->domain
-                ),
-                $data,
-            );
+            ->post('/api/_action/sync', $data);
     }
 }
