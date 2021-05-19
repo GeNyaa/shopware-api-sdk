@@ -8,7 +8,7 @@ namespace GeNyaa\ShopwareApiSdk\Dto;
 
 use GeNyaa\ShopwareApiSdk\ShopwareApiClient;
 
-class Parameters implements Arrayable
+final class Parameters extends DtoAbstract
 {
     /**
      * Filter types
@@ -46,6 +46,11 @@ class Parameters implements Arrayable
         $this->parameters[$key] = $value;
 
         return $this;
+    }
+
+    public function get(string $key): mixed
+    {
+        return $this->parameters[$key] ?? null;
     }
 
     public function setFilter(string $key, mixed $value, string $type = self::FILTER_TYPE_EQUALS): self
@@ -96,9 +101,19 @@ class Parameters implements Arrayable
         return is_null($page) ? 1 : $page;
     }
 
-    public function get(string $key): mixed
+    public function getLimit(): ?int
     {
-        return $this->parameters[$key] ?? null;
+        return $this->get('limit');
+    }
+
+    public function getCountMode(): ?int
+    {
+        return $this->get('total-count-mode');
+    }
+
+    public function getSort(string $key): ?array
+    {
+        return $this->get('sort')[$key] ?? null;
     }
 
     public function toArray(): array

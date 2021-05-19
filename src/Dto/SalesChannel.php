@@ -6,24 +6,21 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Dto;
 
 
-final class Language extends DtoAbstract
+final class SalesChannel extends DtoAbstract
 {
     public function __construct(
         public string $id,
-        public string $name,
-        public ?string $isoCode,
-        public ?string $locale,
+        public ?string $name,
     )
     {
     }
 
     public function toArray(): array
     {
-        return [
+         return [
             'id' => $this->id,
             'name' => $this->name,
-            'isoCode' => $this->isoCode,
-            'locale' => $this->locale,
         ];
     }
+
 }

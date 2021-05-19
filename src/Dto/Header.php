@@ -7,7 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Dto;
 
 use GeNyaa\ShopwareApiSdk\Dto\Arrayable;
 
-class Header implements Arrayable
+final class Header extends DtoAbstract
 {
     public function __construct(
         public array $headers = []
@@ -28,7 +28,14 @@ class Header implements Arrayable
 
     public function get(string $key): ?string
     {
-        return $this->headers[$key];
+        return $this->headers[$key] ?? null;
+    }
+
+    public function delete(string $key): self
+    {
+        unset($this->headers[$key]);
+
+        return $this;
     }
 
     public function setLanguage(string $id): self
@@ -41,6 +48,13 @@ class Header implements Arrayable
     public function getLanguage(): ?string
     {
         return $this->get('sw-language-id');
+    }
+
+    public function deleteLanguage(): self
+    {
+        $this->delete('sw-language-id');
+
+        return $this;
     }
 
     public function toArray(): array

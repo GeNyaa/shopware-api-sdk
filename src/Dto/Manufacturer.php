@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Dto;
 
 
-class Manufacturer implements Arrayable
+final class Manufacturer extends DtoAbstract
 {
     public function __construct(
         public string $id,

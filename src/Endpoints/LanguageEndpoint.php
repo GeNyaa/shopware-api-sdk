@@ -23,11 +23,10 @@ class LanguageEndpoint extends EndpointAbstract
     public function mapInto(array $language): Language
     {
         return new Language(
-            $category['id'],
-            $category['name'],
-            $category['parentId'],
-            $category['active'],
-            $category['visible'],
+            $language['id'],
+            $language['name'],
+            $language['isoCode'] ?? null,
+            $language['locale'],
         );
     }
 }

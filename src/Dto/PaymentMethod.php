@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
+
 namespace GeNyaa\ShopwareApiSdk\Dto;
 
-use Carbon\Carbon;
 
-final class Category extends DtoAbstract
+final class PaymentMethod extends DtoAbstract
 {
     public function __construct(
         public string $id,
         public string $name,
-        public ?string $parentId = null,
-        public bool $active = true,
-        public bool $visible = true,
+        public ?string $description,
+        public int $position,
+        public bool $active,
     )
     {
     }
@@ -22,10 +22,11 @@ final class Category extends DtoAbstract
     {
         return [
             'id' => $this->id,
-            'parentId' => $this->parentId,
             'name' => $this->name,
+            'description' => $this->description,
+            'position' => $this->position,
             'active' => $this->active,
-            'visible' => $this->visible,
         ];
     }
+
 }

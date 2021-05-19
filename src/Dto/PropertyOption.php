@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Dto;
 
 
-class PropertyOption implements Arrayable
+final class PropertyOption extends DtoAbstract
 {
     public function __construct(
         public string $id,

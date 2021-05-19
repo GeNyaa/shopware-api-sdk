@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Dto;
 
 
-class Currency implements Arrayable
+final class Currency extends DtoAbstract
 {
     public function __construct(
         public string $id,
@@ -33,7 +33,7 @@ class Currency implements Arrayable
             'decimalPrecision' => $this->decimalPrecision,
         ];
 
-        if(!is_null($this->translations)) {
+        if (!is_null($this->translations)) {
             $currency['translations'] = $this->translations;
         }
 

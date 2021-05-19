@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Dto;
 
 
-class Tax implements Arrayable
+class Tax extends DtoAbstract
 {
     public function __construct(
         public string $id,

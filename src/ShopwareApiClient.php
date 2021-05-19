@@ -8,10 +8,15 @@ use Carbon\Carbon;
 use GeNyaa\ShopwareApiSdk\Dto\Arrayable;
 use GeNyaa\ShopwareApiSdk\Endpoints\CategoryEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\CurrencyEndpoint;
+use GeNyaa\ShopwareApiSdk\Endpoints\CustomerEndpoint;
+use GeNyaa\ShopwareApiSdk\Endpoints\CustomerGroupEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\LanguageEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\ManufacturerEndpoint;
+use GeNyaa\ShopwareApiSdk\Endpoints\PaymentMethodEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\PropertyEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\PropertyOptionEndpoint;
+use GeNyaa\ShopwareApiSdk\Endpoints\SalesChannelEndpoint;
+use GeNyaa\ShopwareApiSdk\Endpoints\SalutationEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\TaxEndpoint;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiAuthenticationException;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
@@ -38,20 +43,25 @@ class ShopwareApiClient
     public PropertyEndpoint $property;
     public PropertyOptionEndpoint $propertyOption;
     public ManufacturerEndpoint $manufacturer;
+    public CustomerEndpoint $customer;
+    public SalutationEndpoint $salutation;
+    public SalesChannelEndpoint $salesChannel;
+    public CustomerGroupEndpoint $customerGroup;
+    public PaymentMethodEndpoint $paymentMethod;
 
     public function __construct(Http $http)
     {
         $this->domain = config('shopware.url');
-        $this->http = $http->baseUrl($this->domain);
+        $this->http = $http;
         $this->clientId = config('shopware.client_id');
         $this->clientSecret = config('shopware.client_secret');
+        $this->expiresTime = Carbon::now();
         $this->initializeEndpoints();
     }
 
     public function setDomain(string $domain): self
     {
         $this->domain = $domain;
-        $this->http->baseUrl($this->domain);
 
         return $this;
     }
@@ -74,37 +84,50 @@ class ShopwareApiClient
         $this->property = new PropertyEndpoint($this);
         $this->propertyOption = new PropertyOptionEndpoint($this);
         $this->manufacturer = new ManufacturerEndpoint($this);
+        $this->customer = new CustomerEndpoint($this);
+        $this->salutation = new SalutationEndpoint($this);
+        $this->salesChannel = new SalesChannelEndpoint($this);
+        $this->customerGroup = new CustomerGroupEndpoint($this);
+        $this->paymentMethod = new PaymentMethodEndpoint($this);
     }
 
-    public function checkBearer(): void
+    public function checkBearer(): self
     {
         if ($this->expiresTime->unix() <= Carbon::now()->unix()) {
-            $this->getBearerToken();
+            return $this->getBearerToken();
         }
+
+        return $this;
     }
 
     /**
      * @throws ShopwareApiAuthenticationException
      */
-    private function getBearerToken(): void
+    private function getBearerToken(): self
     {
         $currentTime = Carbon::now();
-        $response = $this->http::post('/api/oauth/token', [
-            'grant_type' => 'client_credentials',
-            'client_id' => $this->clientId,
-            'client_secret' => $this->clientSecret,
-        ])->onError(function () {
-            throw new ShopwareApiAuthenticationException('client_id and/or client_secret are not authorized to access this domain.');
-        });
+        $response = $this->http::baseUrl($this->domain)
+            ->post('/api/oauth/token', [
+                'grant_type' => 'client_credentials',
+                'client_id' => $this->clientId,
+                'client_secret' => $this->clientSecret,
+            ])
+            ->onError(function () {
+                throw new ShopwareApiAuthenticationException('client_id and/or client_secret are not authorized to access this domain.');
+            });
 
         $data = $response->json();
 
         $this->bearer = $data['access_token'] ?? null;
         $this->expiresTime = $currentTime->addSeconds($data['expires_in'] ?? 0);
+
+        return $this;
     }
 
     public function performGetRequest(string $uri, Parameters $parameters = null, Header $header = null): Response
     {
+        $this->checkBearer();
+
         if (is_null($header)) {
             $header = new Header();
         }
@@ -113,19 +136,28 @@ class ShopwareApiClient
             $parameters = new Parameters();
         }
 
-        return $this->http::withToken($this->bearer)
+        return $this->http::baseUrl($this->domain)
+            ->withToken($this->bearer)
             ->withHeaders($header->toArray())
             ->get($uri, $parameters->toArray());
     }
 
     public function performSyncRequest(array $data, Header $header = null): Response
     {
+        $this->checkBearer();
+
         if (is_null($header)) {
             $header = new Header();
         }
 
-        return $this->http::withToken($this->bearer)
+        return $this->http::baseUrl($this->domain)
+            ->withToken($this->bearer)
             ->withHeaders($header->toArray())
             ->post('/api/_action/sync', $data);
+    }
+
+    public function copy(): self
+    {
+        return clone $this;
     }
 }

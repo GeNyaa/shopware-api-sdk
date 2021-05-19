@@ -21,9 +21,9 @@ abstract class EndpointAbstract implements EndpointInterface
 
     protected string $resource;
 
-    public ?Parameters $parameters = null;
+    private ?Parameters $parameters = null;
 
-    public ?Header $header = null;
+    private ?Header $header = null;
 
     public function __construct(
         protected ShopwareApiClient $client

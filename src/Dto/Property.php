@@ -8,7 +8,7 @@ namespace GeNyaa\ShopwareApiSdk\Dto;
 
 use Illuminate\Support\Collection;
 
-class Property implements Arrayable
+class Property extends DtoAbstract
 {
     public function __construct(
         public string $id,

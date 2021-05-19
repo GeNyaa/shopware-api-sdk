@@ -6,9 +6,10 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Dto;
 
 use Carbon\Carbon;
+use GeNyaa\ShopwareApiSdk\Dto\Variables\CustomFields;
 use Illuminate\Support\Collection;
 
-class Product implements Arrayable
+final class Product extends DtoAbstract
 {
     public function __construct(
         public string $id,
@@ -21,7 +22,7 @@ class Product implements Arrayable
         public int|float|null $purchaseUnit = null,
         public ?string $manufacturerId = null,
         public ?Collection $categories = null,
-        public ?array $customFields = null,
+        public ?CustomFields $customFields = null,
         public ?Collection $properties = null,
     )
     {
