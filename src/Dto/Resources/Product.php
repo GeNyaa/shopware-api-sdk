@@ -3,9 +3,10 @@
 declare(strict_types=1);
 
 
-namespace GeNyaa\ShopwareApiSdk\Dto;
+namespace GeNyaa\ShopwareApiSdk\Dto\Resources;
 
 use Carbon\Carbon;
+use GeNyaa\ShopwareApiSdk\Dto\DtoAbstract;
 use GeNyaa\ShopwareApiSdk\Dto\Variables\CustomFields;
 use Illuminate\Support\Collection;
 

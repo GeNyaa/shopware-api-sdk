@@ -5,9 +5,7 @@ declare(strict_types=1);
 
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
-
-use GeNyaa\ShopwareApiSdk\Dto\Category;
-use GeNyaa\ShopwareApiSdk\Dto\Tax;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\Tax;
 
 class TaxEndpoint extends EndpointAbstract
 {

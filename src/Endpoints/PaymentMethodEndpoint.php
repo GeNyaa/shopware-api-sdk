@@ -5,9 +5,7 @@ declare(strict_types=1);
 
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
-
-use GeNyaa\ShopwareApiSdk\Dto\Currency;
-use GeNyaa\ShopwareApiSdk\Dto\PaymentMethod;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\PaymentMethod;
 
 class PaymentMethodEndpoint extends EndpointAbstract
 {

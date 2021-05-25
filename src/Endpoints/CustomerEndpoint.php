@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
-use GeNyaa\ShopwareApiSdk\Dto\Customer;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\Customer;
 
 class CustomerEndpoint extends EndpointAbstract
 {

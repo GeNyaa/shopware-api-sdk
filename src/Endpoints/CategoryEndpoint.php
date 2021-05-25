@@ -6,11 +6,8 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
-use GeNyaa\ShopwareApiSdk\Dto\Arrayable;
-use GeNyaa\ShopwareApiSdk\Dto\Category;
-use GeNyaa\ShopwareApiSdk\Dto\Parameters;
-use GeNyaa\ShopwareApiSdk\Dto\Product;
-use Illuminate\Support\Collection;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\Category;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\CategoryCollection;
 
 class CategoryEndpoint extends EndpointAbstract
 {
@@ -18,9 +15,9 @@ class CategoryEndpoint extends EndpointAbstract
 
     protected string $resource = 'category';
 
-    public function all(): Collection
+    public function all(): CategoryCollection
     {
-        return parent::all()->mapInto(Category::class);
+        return (new CategoryCollection())->merge(parent::all())->mapInto(Category::class);
     }
 
     public function first(): ?Category

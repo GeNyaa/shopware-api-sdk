@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
-use GeNyaa\ShopwareApiSdk\Dto\Product;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\Product;
 use Illuminate\Support\Collection;
 
 class ProductEndpoint extends EndpointAbstract

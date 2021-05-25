@@ -3,9 +3,10 @@
 declare(strict_types=1);
 
 
-namespace GeNyaa\ShopwareApiSdk\Dto;
+namespace GeNyaa\ShopwareApiSdk\Dto\Resources;
 
 
+use GeNyaa\ShopwareApiSdk\Dto\DtoAbstract;
 use Illuminate\Support\Collection;
 
 final class Customer extends DtoAbstract

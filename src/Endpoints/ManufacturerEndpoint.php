@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
-use GeNyaa\ShopwareApiSdk\Dto\Manufacturer;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\Manufacturer;
 
 class ManufacturerEndpoint extends EndpointAbstract
 {

@@ -5,12 +5,7 @@ declare(strict_types=1);
 
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
-
-use Exception;
-use GeNyaa\ShopwareApiSdk\Dto\Parameters;
-use GeNyaa\ShopwareApiSdk\Dto\Property;
-use GeNyaa\ShopwareApiSdk\Dto\PropertyOption;
-use Illuminate\Support\Collection;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\PropertyOption;
 
 class PropertyOptionEndpoint extends EndpointAbstract
 {

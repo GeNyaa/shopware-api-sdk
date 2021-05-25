@@ -3,25 +3,26 @@
 declare(strict_types=1);
 
 
-namespace GeNyaa\ShopwareApiSdk\Dto;
+namespace GeNyaa\ShopwareApiSdk\Dto\Resources;
 
 
-class Tax extends DtoAbstract
+use GeNyaa\ShopwareApiSdk\Dto\DtoAbstract;
+
+final class SalesChannel extends DtoAbstract
 {
     public function __construct(
         public string $id,
-        public string $name,
-        public float|int $taxRate
+        public ?string $name,
     )
     {
     }
 
     public function toArray(): array
     {
-        return [
+         return [
             'id' => $this->id,
             'name' => $this->name,
-            'taxRate' => $this->taxRate,
         ];
     }
+
 }

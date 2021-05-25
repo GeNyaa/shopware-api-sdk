@@ -6,7 +6,7 @@ namespace GeNyaa\ShopwareApiSdk\Dto\Variables;
 
 use Carbon\Carbon;
 use GeNyaa\ShopwareApiSdk\Dto\Arrayable;
-use Illuminate\Contracts\Support\Jsonable;
+use GeNyaa\ShopwareApiSdk\Dto\Jsonable;
 
 class CustomFields implements Arrayable, Jsonable
 {
@@ -38,5 +38,15 @@ class CustomFields implements Arrayable, Jsonable
     public function toArray(): array
     {
         return $this->customFields;
+    }
+
+    public function toJson($options = 0): string
+    {
+        return json_encode($this->toArray(), $options);
+    }
+
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }

@@ -6,8 +6,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
-use GeNyaa\ShopwareApiSdk\Dto\Currency;
-use GeNyaa\ShopwareApiSdk\Dto\CustomerGroup;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\CustomerGroup;
 
 class CustomerGroupEndpoint extends EndpointAbstract
 {
