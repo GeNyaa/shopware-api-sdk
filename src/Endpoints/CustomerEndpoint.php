@@ -29,11 +29,14 @@ class CustomerEndpoint extends EndpointAbstract
             $customer['firstName'],
             $customer['lastName'],
             $customer['email'],
-            $customer['customerGroup'],
+            $customer['groupId'],
             $customer['salesChannelId'],
             $customer['languageId'],
-            $customer['paymentMethod'],
             $customer['customerNumber'],
+            $customer['defaultBillingAddressId'],
+            $customer['defaultPaymentMethodId'],
+            $customer['defaultShippingAddressId'],
+            vatIds: is_null($customer['vatIds']) ? null : collect($customer['vatIds']),
         );
     }
 }

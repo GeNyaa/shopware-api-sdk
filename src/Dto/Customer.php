@@ -17,7 +17,7 @@ final class Customer extends DtoAbstract
         public string $firstName,
         public string $lastName,
         public string $email,
-        public string $customerGroup,
+        public string $groupId,
         public string $salesChannelId,
         public string $languageId,
         public string $customerNumber,
@@ -39,31 +39,30 @@ final class Customer extends DtoAbstract
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
             'email' => $this->email,
-            'customerGroup' => $this->customerGroup,
+            'groupId' => $this->groupId,
             'salesChannelId' => $this->salesChannelId,
             'languageId' => $this->languageId,
-            'paymentMethod' => $this->paymentMethod,
             'customerNumber' => $this->customerNumber,
         ];
 
         if (!is_null($this->defaultBillingAddressId)) {
-            $currency['defaultBillingAddressId'] = $this->defaultBillingAddressId;
+            $customer['defaultBillingAddressId'] = $this->defaultBillingAddressId;
         }
 
         if (!is_null($this->defaultPaymentMethodId)) {
-            $currency['defaultPaymentMethodId'] = $this->defaultPaymentMethodId;
+            $customer['defaultPaymentMethodId'] = $this->defaultPaymentMethodId;
         }
 
         if (!is_null($this->defaultShippingAddressId)) {
-            $currency['defaultShippingAddressId'] = $this->defaultShippingAddressId;
+            $customer['defaultShippingAddressId'] = $this->defaultShippingAddressId;
         }
 
         if (!is_null($this->addresses)) {
-            $currency['addresses'] = $this->addresses;
+            $customer['addresses'] = $this->addresses;
         }
 
         if (!is_null($this->vatIds)) {
-            $currency['vatIds'] = $this->vatIds;
+            $customer['vatIds'] = $this->vatIds;
         }
 
         return $customer;

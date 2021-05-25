@@ -119,18 +119,9 @@ abstract class EndpointAbstract implements EndpointInterface
     {
         $return = $upsertable;
 
-        if ($upsertable instanceof Collection) {
-            $upsertable->map(function (Arrayable $arrayable) {
-                return $arrayable->toArray();
-            });
-
-            $upsertable = $upsertable->toArray();
-        }
-
         if ($upsertable instanceof Arrayable) {
-            $upsertable = [$upsertable->toArray()];
+            $upsertable = collect($upsertable->toArray());
         }
-
 
         $data = [
             sprintf('write-%s', $this->resource) => [

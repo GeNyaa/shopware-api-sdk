@@ -7,7 +7,9 @@ namespace GeNyaa\ShopwareApiSdk;
 use Carbon\Carbon;
 use GeNyaa\ShopwareApiSdk\Dto\Arrayable;
 use GeNyaa\ShopwareApiSdk\Endpoints\CategoryEndpoint;
+use GeNyaa\ShopwareApiSdk\Endpoints\CountryEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\CurrencyEndpoint;
+use GeNyaa\ShopwareApiSdk\Endpoints\CustomerAddressEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\CustomerEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\CustomerGroupEndpoint;
 use GeNyaa\ShopwareApiSdk\Endpoints\LanguageEndpoint;
@@ -48,6 +50,8 @@ class ShopwareApiClient
     public SalesChannelEndpoint $salesChannel;
     public CustomerGroupEndpoint $customerGroup;
     public PaymentMethodEndpoint $paymentMethod;
+    public CustomerAddressEndpoint $customerAddress;
+    public CountryEndpoint $country;
 
     public function __construct(Http $http)
     {
@@ -89,6 +93,8 @@ class ShopwareApiClient
         $this->salesChannel = new SalesChannelEndpoint($this);
         $this->customerGroup = new CustomerGroupEndpoint($this);
         $this->paymentMethod = new PaymentMethodEndpoint($this);
+        $this->customerAddress = new CustomerAddressEndpoint($this);
+        $this->country = new CountryEndpoint($this);
     }
 
     public function checkBearer(): self

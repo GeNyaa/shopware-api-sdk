@@ -13,27 +13,27 @@ final class Parameters extends DtoAbstract
     /**
      * Filter types
      */
-    const FILTER_TYPE_EQUALS = 'equals';
-    const FILTER_TYPE_EQUALS_ANY = 'equalsAny';
-    const FILTER_TYPE_CONTAINS = 'contains';
-    const FILTER_TYPE_RANGE = 'range';
-    const FILTER_TYPE_NOT = 'not';
-    const FILTER_TYPE_MULTI = 'multi';
-    const FILTER_TYPE_PREFIX = 'prefix';
-    const FILTER_TYPE_SUFFIX = 'suffix';
+    public const FILTER_TYPE_EQUALS = 'equals';
+    public const FILTER_TYPE_EQUALS_ANY = 'equalsAny';
+    public const FILTER_TYPE_CONTAINS = 'contains';
+    public const FILTER_TYPE_RANGE = 'range';
+    public const FILTER_TYPE_NOT = 'not';
+    public const FILTER_TYPE_MULTI = 'multi';
+    public const FILTER_TYPE_PREFIX = 'prefix';
+    public const FILTER_TYPE_SUFFIX = 'suffix';
 
     /**
      * Sort direction options
      */
-    const SORT_ASC = 'ASC';
-    const SORT_DESC = 'DESC';
+    public const SORT_ASC = 'ASC';
+    public const SORT_DESC = 'DESC';
 
     /**
      * Count modes
      */
-    const COUNT_MODE_NO_TOTAL = 0;
-    const COUNT_MODE_TOTAL = 1;
-    const COUNT_MODE_NEXT_PAGE = 2;
+    public const COUNT_MODE_NO_TOTAL = 0;
+    public const COUNT_MODE_TOTAL = 1;
+    public const COUNT_MODE_NEXT_PAGE = 2;
 
     public function __construct(
         private array $parameters = []
