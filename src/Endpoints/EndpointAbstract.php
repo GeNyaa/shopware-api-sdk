@@ -5,12 +5,8 @@ declare(strict_types=1);
 
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
-
-use Exception;
-use GeNyaa\ShopwareApiSdk\Dto\Arrayable;
-use GeNyaa\ShopwareApiSdk\Dto\DtoAbstract;
+use GeNyaa\ShopwareApiSdk\Dto\DtoInterface;
 use Illuminate\Support\Collection;
-use Response;
 use GeNyaa\ShopwareApiSdk\Dto\Header;
 use GeNyaa\ShopwareApiSdk\Dto\Parameters;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
@@ -146,7 +142,7 @@ abstract class EndpointAbstract implements EndpointInterface
     /**
      * @throws ShopwareApiException
      */
-    public function create(DtoAbstract $resource): DtoAbstract
+    protected function createParent(DtoInterface $resource): DtoInterface
     {
         $response = $this->client->performPostRequest($this->resourcePath, $resource->toArray(), $this->header);
 
@@ -154,6 +150,6 @@ abstract class EndpointAbstract implements EndpointInterface
             throw new ShopwareApiException($response->body());
         }
 
-        return $dto;
+        return $resource;
     }
 }

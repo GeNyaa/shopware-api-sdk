@@ -56,6 +56,15 @@ class PropertyEndpoint extends EndpointAbstract
         });
     }
 
+    /**
+     * @throws ShopwareApiException
+     */
+    public function create(Property $property): Property
+    {
+        $this->createParent($property);
+        return $property;
+    }
+
     public function mapInto(array $property): Property
     {
         return new Property(

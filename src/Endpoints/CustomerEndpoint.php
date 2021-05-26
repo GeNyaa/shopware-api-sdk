@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Customer;
+use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class CustomerEndpoint extends EndpointAbstract
 {
@@ -18,6 +19,15 @@ class CustomerEndpoint extends EndpointAbstract
         $customer = parent::first();
 
         return is_null($customer) ? null : $this->mapInto($customer);
+    }
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function create(Customer $customer): Customer
+    {
+        $this->createParent($customer);
+        return $customer;
     }
 
     public function mapInto(array $customer): Customer

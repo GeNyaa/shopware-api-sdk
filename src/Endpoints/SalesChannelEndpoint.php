@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\SalesChannel;
+use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class SalesChannelEndpoint extends EndpointAbstract
 {
@@ -18,6 +19,15 @@ class SalesChannelEndpoint extends EndpointAbstract
         $salesChannel = parent::first();
 
         return is_null($salesChannel) ? null : $this->mapInto($salesChannel);
+    }
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function create(SalesChannel $salesChannel): SalesChannel
+    {
+        $this->createParent($salesChannel);
+        return $salesChannel;
     }
 
     public function mapInto(array $salesChannel): SalesChannel

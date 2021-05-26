@@ -7,6 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\CustomerGroup;
+use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class CustomerGroupEndpoint extends EndpointAbstract
 {
@@ -19,6 +20,15 @@ class CustomerGroupEndpoint extends EndpointAbstract
         $customerGroup = parent::first();
 
         return is_null($customerGroup) ? null : $this->mapInto($customerGroup);
+    }
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function create(CustomerGroup $customerGroup): CustomerGroup
+    {
+        $this->createParent($customerGroup);
+        return $customerGroup;
     }
 
     public function mapInto(array $customerGroup): CustomerGroup

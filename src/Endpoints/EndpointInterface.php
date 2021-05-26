@@ -15,7 +15,6 @@ use Illuminate\Support\Collection;
 
 interface EndpointInterface
 {
-    public function create(DtoAbstract $resource);
     public function parameters(Parameters $parameters): self;
     public function header(Header $header): self;
     public function first();

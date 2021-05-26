@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\PropertyOption;
+use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class PropertyOptionEndpoint extends EndpointAbstract
 {
@@ -18,6 +19,15 @@ class PropertyOptionEndpoint extends EndpointAbstract
         $propertyOption = parent::first();
 
         return is_null($propertyOption) ? null : $this->mapInto($propertyOption);
+    }
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function create(PropertyOption $propertyOption): PropertyOption
+    {
+        $this->createParent($propertyOption);
+        return $propertyOption;
     }
 
     public function mapInto(array $propertyOption): PropertyOption

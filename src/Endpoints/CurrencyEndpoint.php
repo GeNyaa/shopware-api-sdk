@@ -7,6 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Currency;
+use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class CurrencyEndpoint extends EndpointAbstract
 {
@@ -19,6 +20,15 @@ class CurrencyEndpoint extends EndpointAbstract
         $currency = parent::first();
 
         return is_null($currency) ? null : $this->mapInto($currency);
+    }
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function create(Currency $currency): Currency
+    {
+        $this->createParent($currency);
+        return $currency;
     }
 
     public function mapInto(array $currency): Currency

@@ -7,6 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Country;
+use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class CountryEndpoint extends EndpointAbstract
 {
@@ -19,6 +20,15 @@ class CountryEndpoint extends EndpointAbstract
         $country = parent::first();
 
         return is_null($country) ? null : $this->mapInto($country);
+    }
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function create(Country $country): Country
+    {
+        $this->createParent($country);
+        return $country;
     }
 
     public function mapInto(array $country): Country

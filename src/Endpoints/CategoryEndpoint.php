@@ -8,6 +8,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Category;
 use GeNyaa\ShopwareApiSdk\Dto\Resources\CategoryCollection;
+use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class CategoryEndpoint extends EndpointAbstract
 {
@@ -27,6 +28,15 @@ class CategoryEndpoint extends EndpointAbstract
         return is_null($category) ? null : $this->mapInto($category);
     }
 
+    /**
+     * @throws ShopwareApiException
+     */
+    public function create(Category $category): Category
+    {
+        $this->createParent($category);
+        return $category;
+    }
+
     public function mapInto(array $category): Category
     {
         return new Category(
@@ -37,4 +47,6 @@ class CategoryEndpoint extends EndpointAbstract
             $category['visible'],
         );
     }
+
+
 }
