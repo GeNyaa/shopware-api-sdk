@@ -7,6 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\CustomerGroup;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\CustomerGroupCollection;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class CustomerGroupEndpoint extends EndpointAbstract
@@ -14,6 +15,16 @@ class CustomerGroupEndpoint extends EndpointAbstract
     protected string $resourcePath = '/api/v3/customer-group';
 
     protected string $resource = 'customer_group';
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function all(): CustomerGroupCollection
+    {
+        return (new CustomerGroupCollection())->merge($this->restAll())->map(function (array $category) {
+            return $this->mapInto($category);
+        });
+    }
 
     public  function first(): ?CustomerGroup
     {
@@ -27,7 +38,7 @@ class CustomerGroupEndpoint extends EndpointAbstract
      */
     public function create(CustomerGroup $customerGroup): CustomerGroup
     {
-        $this->createParent($customerGroup);
+        $this->restCreate($customerGroup);
         return $customerGroup;
     }
 

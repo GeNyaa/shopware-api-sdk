@@ -7,6 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Language;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\LanguageCollection;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class LanguageEndpoint extends EndpointAbstract
@@ -15,7 +16,17 @@ class LanguageEndpoint extends EndpointAbstract
 
     protected string $resource = 'language';
 
-    public  function first(): ?Language
+    /**
+     * @throws ShopwareApiException
+     */
+    public function all(): LanguageCollection
+    {
+        return (new LanguageCollection())->merge($this->restAll())->map(function (array $category) {
+            return $this->mapInto($category);
+        });
+    }
+
+    public function first(): ?Language
     {
         $language = parent::first();
 
@@ -27,7 +38,7 @@ class LanguageEndpoint extends EndpointAbstract
      */
     public function create(Language $language): Language
     {
-        $this->createParent($language);
+        $this->restCreate($language);
         return $language;
     }
 

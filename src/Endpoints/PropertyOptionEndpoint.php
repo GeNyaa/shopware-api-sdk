@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\PropertyOption;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\PropertyOptionCollection;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class PropertyOptionEndpoint extends EndpointAbstract
@@ -13,6 +14,16 @@ class PropertyOptionEndpoint extends EndpointAbstract
     protected string $resourcePath = '/api/v3/property-group-option';
 
     protected string $resource = 'property_group_option';
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function all(): PropertyOptionCollection
+    {
+        return (new PropertyOptionCollection())->merge($this->restAll())->map(function (array $category) {
+            return $this->mapInto($category);
+        });
+    }
 
     public function first(): ?PropertyOption
     {
@@ -26,7 +37,7 @@ class PropertyOptionEndpoint extends EndpointAbstract
      */
     public function create(PropertyOption $propertyOption): PropertyOption
     {
-        $this->createParent($propertyOption);
+        $this->restCreate($propertyOption);
         return $propertyOption;
     }
 

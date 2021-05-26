@@ -45,7 +45,7 @@ abstract class EndpointAbstract implements EndpointInterface
     /**
      * @throws ShopwareApiException
      */
-    public function all(): Collection
+    protected function restAll(): Collection
     {
         $response = $this->client->performGetRequest(
             $this->resourcePath,
@@ -142,7 +142,7 @@ abstract class EndpointAbstract implements EndpointInterface
     /**
      * @throws ShopwareApiException
      */
-    protected function createParent(DtoInterface $resource): DtoInterface
+    protected function restCreate(DtoInterface $resource): DtoInterface
     {
         $response = $this->client->performPostRequest($this->resourcePath, $resource->toArray(), $this->header);
 

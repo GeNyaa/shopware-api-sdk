@@ -16,9 +16,14 @@ class CategoryEndpoint extends EndpointAbstract
 
     protected string $resource = 'category';
 
+    /**
+     * @throws ShopwareApiException
+     */
     public function all(): CategoryCollection
     {
-        return (new CategoryCollection())->merge(parent::all())->mapInto(Category::class);
+        return (new CategoryCollection())->merge($this->restAll())->map(function (array $category) {
+            return $this->mapInto($category);
+        });
     }
 
     public function first(): ?Category
@@ -33,7 +38,7 @@ class CategoryEndpoint extends EndpointAbstract
      */
     public function create(Category $category): Category
     {
-        $this->createParent($category);
+        $this->restCreate($category);
         return $category;
     }
 

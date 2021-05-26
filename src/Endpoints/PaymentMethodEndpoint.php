@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\PaymentMethod;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\PaymentMethodCollection;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class PaymentMethodEndpoint extends EndpointAbstract
@@ -13,6 +14,16 @@ class PaymentMethodEndpoint extends EndpointAbstract
     protected string $resourcePath = '/api/v3/payment-method';
 
     protected string $resource = 'payment_method';
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function all(): PaymentMethodCollection
+    {
+        return (new PaymentMethodCollection())->merge($this->restAll())->map(function (array $category) {
+            return $this->mapInto($category);
+        });
+    }
 
     public  function first(): ?PaymentMethod
     {
@@ -26,7 +37,7 @@ class PaymentMethodEndpoint extends EndpointAbstract
      */
     public function create(PaymentMethod $paymentMethod): PaymentMethod
     {
-        $this->createParent($paymentMethod);
+        $this->restCreate($paymentMethod);
         return $paymentMethod;
     }
 

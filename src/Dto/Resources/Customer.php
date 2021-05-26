@@ -25,7 +25,7 @@ final class Customer extends DtoAbstract
         public ?string $defaultBillingAddressId = null,
         public ?string $defaultPaymentMethodId = null,
         public ?string $defaultShippingAddressId = null,
-        public ?Collection $addresses = null,
+        public ?CustomerAddressCollection $addresses = null,
         public ?Collection $vatIds = null,
     )
     {

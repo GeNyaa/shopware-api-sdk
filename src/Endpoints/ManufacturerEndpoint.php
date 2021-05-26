@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Manufacturer;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\ManufacturerCollection;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class ManufacturerEndpoint extends EndpointAbstract
@@ -12,6 +13,16 @@ class ManufacturerEndpoint extends EndpointAbstract
     protected string $resourcePath = '/api/v3/product-manufacturer';
 
     protected string $resource = 'product_manufacturer';
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function all(): ManufacturerCollection
+    {
+        return (new ManufacturerCollection())->merge($this->restAll())->map(function (array $category) {
+            return $this->mapInto($category);
+        });
+    }
 
     public  function first(): ?Manufacturer
     {
@@ -25,7 +36,7 @@ class ManufacturerEndpoint extends EndpointAbstract
      */
     public function create(Manufacturer $manufacturer): Manufacturer
     {
-        $this->createParent($manufacturer);
+        $this->restCreate($manufacturer);
         return $manufacturer;
     }
 

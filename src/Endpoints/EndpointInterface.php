@@ -19,5 +19,4 @@ interface EndpointInterface
     public function header(Header $header): self;
     public function first();
     public function upsert(Collection $upsertable): Collection;
-    public function mapInto(array $array);
 }

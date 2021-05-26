@@ -7,7 +7,6 @@ namespace GeNyaa\ShopwareApiSdk\Dto\Resources;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\DtoAbstract;
-use phpDocumentor\Reflection\Types\Collection;
 
 final class Country extends DtoAbstract
 {

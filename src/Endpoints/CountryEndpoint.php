@@ -7,6 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Country;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\CountryCollection;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class CountryEndpoint extends EndpointAbstract
@@ -14,6 +15,16 @@ class CountryEndpoint extends EndpointAbstract
     protected string $resourcePath = '/api/v3/country';
 
     protected string $resource = 'country';
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function all(): CountryCollection
+    {
+        return (new CountryCollection())->merge($this->restAll())->map(function (array $country) {
+            return $this->mapInto($country);
+        });
+    }
 
     public  function first(): ?Country
     {
@@ -27,7 +38,7 @@ class CountryEndpoint extends EndpointAbstract
      */
     public function create(Country $country): Country
     {
-        $this->createParent($country);
+        $this->restCreate($country);
         return $country;
     }
 

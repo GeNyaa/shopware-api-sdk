@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace GeNyaa\ShopwareApiSdk\Dto\Resources;
 
-use Carbon\Carbon;
 use GeNyaa\ShopwareApiSdk\Dto\DtoAbstract;
 use GeNyaa\ShopwareApiSdk\Dto\Variables\CustomFields;
 use Illuminate\Support\Collection;
@@ -16,7 +15,7 @@ final class Product extends DtoAbstract
         public string $id,
         public string $name,
         public ?string $taxId,
-        public ?Collection $price,
+        public ?PriceCollection $price,
         public ?string $productNumber,
         public int $stock,
         public bool $active,

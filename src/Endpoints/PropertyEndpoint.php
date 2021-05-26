@@ -7,6 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 use GeNyaa\ShopwareApiSdk\Dto\Parameters;
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Property;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\PropertyCollection;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 use Illuminate\Support\Collection;
 
@@ -15,6 +16,16 @@ class PropertyEndpoint extends EndpointAbstract
     protected string $resourcePath = '/api/v3/property-group';
 
     protected string $resource = 'property_group';
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function all(): PropertyCollection
+    {
+        return (new PropertyCollection())->merge($this->restAll())->map(function (array $category) {
+            return $this->mapInto($category);
+        });
+    }
 
     public function first(): ?Property
     {
@@ -61,7 +72,7 @@ class PropertyEndpoint extends EndpointAbstract
      */
     public function create(Property $property): Property
     {
-        $this->createParent($property);
+        $this->restCreate($property);
         return $property;
     }
 

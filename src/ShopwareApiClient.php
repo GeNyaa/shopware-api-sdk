@@ -32,10 +32,10 @@ class ShopwareApiClient
 {
     public Http $http;
     protected string $domain;
-    protected ?string $bearer;
+    protected ?string $bearer = null;
     protected string $clientId;
     protected string $clientSecret;
-    protected ?Carbon $expiresTime;
+    protected ?Carbon $expiresTime = null;
 
     public CategoryEndpoint $category;
     public ProductEndpoint $product;
@@ -55,11 +55,9 @@ class ShopwareApiClient
 
     public function __construct(Http $http)
     {
-        $this->domain = config('shopware.url');
         $this->http = $http;
-        $this->clientId = config('shopware.client_id');
-        $this->clientSecret = config('shopware.client_secret');
-        $this->expiresTime = Carbon::now();
+        $this->setDomain(config('shopware.url'));
+        $this->setClientCredentials(config('shopware.client_id'), config('shopware.client_secret'));
         $this->initializeEndpoints();
     }
 
@@ -99,7 +97,7 @@ class ShopwareApiClient
 
     public function checkBearer(): self
     {
-        if ($this->expiresTime->unix() <= Carbon::now()->unix()) {
+        if (is_null($this->expiresTime) || $this->expiresTime->unix() <= Carbon::now()->unix()) {
             return $this->getBearerToken();
         }
 

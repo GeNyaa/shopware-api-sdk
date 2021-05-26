@@ -7,6 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Product;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\ProductCollection;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 use Illuminate\Support\Collection;
 
@@ -16,9 +17,14 @@ class ProductEndpoint extends EndpointAbstract
 
     protected string $resource = 'product';
 
-    public function all(): Collection
+    /**
+     * @throws ShopwareApiException
+     */
+    public function all(): ProductCollection
     {
-        return parent::all()->mapInto(Product::class);
+        return (new ProductCollection())->merge($this->restAll())->map(function (array $category) {
+            return $this->mapInto($category);
+        });
     }
 
     /**
@@ -26,7 +32,7 @@ class ProductEndpoint extends EndpointAbstract
      */
     public function create(Product $product): Product
     {
-        $this->createParent($product);
+        $this->restCreate($product);
         return $product;
     }
 

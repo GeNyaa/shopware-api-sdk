@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\CustomerAddress;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\CustomerAddressCollection;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class CustomerAddressEndpoint extends EndpointAbstract
@@ -12,6 +13,16 @@ class CustomerAddressEndpoint extends EndpointAbstract
     protected string $resourcePath = '/api/v3/customer-address';
 
     protected string $resource = 'customer_address';
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function all(): CustomerAddressCollection
+    {
+        return (new CustomerAddressCollection())->merge($this->restAll())->map(function (array $category) {
+            return $this->mapInto($category);
+        });
+    }
 
     public  function first(): ?CustomerAddress
     {
@@ -25,7 +36,7 @@ class CustomerAddressEndpoint extends EndpointAbstract
      */
     public function create(CustomerAddress $customerAddress): CustomerAddress
     {
-        $this->createParent($customerAddress);
+        $this->restCreate($customerAddress);
         return $customerAddress;
     }
 

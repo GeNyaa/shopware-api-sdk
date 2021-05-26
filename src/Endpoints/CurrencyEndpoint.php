@@ -7,6 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Currency;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\CurrencyCollection;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 
 class CurrencyEndpoint extends EndpointAbstract
@@ -14,6 +15,16 @@ class CurrencyEndpoint extends EndpointAbstract
     protected string $resourcePath = '/api/v3/currency';
 
     protected string $resource = 'currency';
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function all(): CurrencyCollection
+    {
+        return (new CurrencyCollection())->merge($this->restAll())->map(function (array $category) {
+            return $this->mapInto($category);
+        });
+    }
 
     public  function first(): ?Currency
     {
@@ -27,7 +38,7 @@ class CurrencyEndpoint extends EndpointAbstract
      */
     public function create(Currency $currency): Currency
     {
-        $this->createParent($currency);
+        $this->restCreate($currency);
         return $currency;
     }
 

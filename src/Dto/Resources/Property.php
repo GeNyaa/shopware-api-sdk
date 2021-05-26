@@ -7,7 +7,6 @@ namespace GeNyaa\ShopwareApiSdk\Dto\Resources;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\DtoAbstract;
-use Illuminate\Support\Collection;
 
 class Property extends DtoAbstract
 {
@@ -17,7 +16,7 @@ class Property extends DtoAbstract
         public ?string $description = null,
         public ?int $position,
         public bool $filterable,
-        public ?Collection $options,
+        public ?PropertyOptionCollection $options,
         public ?array $translations,
     )
     {
