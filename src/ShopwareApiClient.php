@@ -148,6 +148,20 @@ class ShopwareApiClient
             ->get($uri, $parameters->toArray());
     }
 
+    public function performPostRequest(string $uri, array $data, Header $header = null): Response
+    {
+        $this->checkBearer();
+
+        if (is_null($header)) {
+            $header = new Header();
+        }
+
+        return $this->http::baseUrl($this->domain)
+            ->withToken($this->bearer)
+            ->withHeaders($header->toArray())
+            ->post($uri, $data);
+    }
+
     public function performSyncRequest(array $data, Header $header = null): Response
     {
         $this->checkBearer();

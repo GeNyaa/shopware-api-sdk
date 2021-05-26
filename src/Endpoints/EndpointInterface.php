@@ -7,15 +7,18 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\Arrayable;
+use GeNyaa\ShopwareApiSdk\Dto\DtoAbstract;
+use GeNyaa\ShopwareApiSdk\Dto\DtoInterface;
 use GeNyaa\ShopwareApiSdk\Dto\Header;
 use GeNyaa\ShopwareApiSdk\Dto\Parameters;
 use Illuminate\Support\Collection;
 
 interface EndpointInterface
 {
+    public function create(DtoAbstract $resource);
     public function parameters(Parameters $parameters): self;
     public function header(Header $header): self;
     public function first();
-    public function upsert(Collection|Arrayable $upsertable): Collection|Arrayable;
+    public function upsert(Collection $upsertable): Collection;
     public function mapInto(array $array);
 }

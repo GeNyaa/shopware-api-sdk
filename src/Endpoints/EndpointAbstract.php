@@ -8,6 +8,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 use Exception;
 use GeNyaa\ShopwareApiSdk\Dto\Arrayable;
+use GeNyaa\ShopwareApiSdk\Dto\DtoAbstract;
 use Illuminate\Support\Collection;
 use Response;
 use GeNyaa\ShopwareApiSdk\Dto\Header;
@@ -94,6 +95,9 @@ abstract class EndpointAbstract implements EndpointInterface
         return $return;
     }
 
+    /**
+     * @throws ShopwareApiException
+     */
     public function first()
     {
         if (is_null($this->parameters)) {
@@ -115,13 +119,12 @@ abstract class EndpointAbstract implements EndpointInterface
         return $response->json()['data'][0] ?? null;
     }
 
-    public function upsert(Collection|Arrayable $upsertable): Collection|Arrayable
+    /**
+     * @throws ShopwareApiException
+     */
+    public function upsert(Collection $upsertable): Collection
     {
         $return = $upsertable;
-
-        if ($upsertable instanceof Arrayable) {
-            $upsertable = collect($upsertable->toArray());
-        }
 
         $data = [
             sprintf('write-%s', $this->resource) => [
@@ -138,5 +141,19 @@ abstract class EndpointAbstract implements EndpointInterface
         }
 
         return $return;
+    }
+
+    /**
+     * @throws ShopwareApiException
+     */
+    public function create(DtoAbstract $resource): DtoAbstract
+    {
+        $response = $this->client->performPostRequest($this->resourcePath, $resource->toArray(), $this->header);
+
+        if ($response->failed()) {
+            throw new ShopwareApiException($response->body());
+        }
+
+        return $dto;
     }
 }
