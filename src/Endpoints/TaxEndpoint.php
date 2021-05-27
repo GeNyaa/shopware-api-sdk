@@ -27,7 +27,7 @@ class TaxEndpoint extends EndpointAbstract
 
     public  function first(): ?Tax
     {
-        $tax = parent::first();
+        $tax = $this->restFirst();
 
         return is_null($tax) ? null : $this->mapInto($tax);
     }

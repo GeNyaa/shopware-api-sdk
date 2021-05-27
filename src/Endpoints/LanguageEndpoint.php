@@ -28,7 +28,7 @@ class LanguageEndpoint extends EndpointAbstract
 
     public function first(): ?Language
     {
-        $language = parent::first();
+        $language = $this->restFirst();
 
         return is_null($language) ? null : $this->mapInto($language);
     }

@@ -24,9 +24,9 @@ class CustomerAddressEndpoint extends EndpointAbstract
         });
     }
 
-    public  function first(): ?CustomerAddress
+    public function first(): ?CustomerAddress
     {
-        $customerAddress = parent::first();
+        $customerAddress = $this->restFirst();
 
         return is_null($customerAddress) ? null : $this->mapInto($customerAddress);
     }

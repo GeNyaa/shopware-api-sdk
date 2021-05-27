@@ -25,9 +25,9 @@ class PaymentMethodEndpoint extends EndpointAbstract
         });
     }
 
-    public  function first(): ?PaymentMethod
+    public function first(): ?PaymentMethod
     {
-        $paymentMethod = parent::first();
+        $paymentMethod = $this->restFirst();
 
         return is_null($paymentMethod) ? null : $this->mapInto($paymentMethod);
     }

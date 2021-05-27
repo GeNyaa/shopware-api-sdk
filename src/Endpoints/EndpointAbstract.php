@@ -94,17 +94,17 @@ abstract class EndpointAbstract implements EndpointInterface
     /**
      * @throws ShopwareApiException
      */
-    public function first()
+    protected function restFirst()
     {
         if (is_null($this->parameters)) {
             $this->parameters = new Parameters();
         }
 
-        $parameters = $this->parameters->set('limit', 1);
+        $this->parameters->set('limit', 1);
 
         $response = $this->client->performGetRequest(
             $this->resourcePath,
-            $parameters,
+            $this->parameters,
             $this->header,
         );
 

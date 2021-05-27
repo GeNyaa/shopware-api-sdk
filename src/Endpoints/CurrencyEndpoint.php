@@ -26,9 +26,9 @@ class CurrencyEndpoint extends EndpointAbstract
         });
     }
 
-    public  function first(): ?Currency
+    public function first(): ?Currency
     {
-        $currency = parent::first();
+        $currency = $this->restFirst();
 
         return is_null($currency) ? null : $this->mapInto($currency);
     }

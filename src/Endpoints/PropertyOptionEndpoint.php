@@ -27,7 +27,7 @@ class PropertyOptionEndpoint extends EndpointAbstract
 
     public function first(): ?PropertyOption
     {
-        $propertyOption = parent::first();
+        $propertyOption = $this->restFirst();
 
         return is_null($propertyOption) ? null : $this->mapInto($propertyOption);
     }

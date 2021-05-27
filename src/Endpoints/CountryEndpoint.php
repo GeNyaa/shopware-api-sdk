@@ -26,9 +26,9 @@ class CountryEndpoint extends EndpointAbstract
         });
     }
 
-    public  function first(): ?Country
+    public function first(): ?Country
     {
-        $country = parent::first();
+        $country = $this->restFirst();
 
         return is_null($country) ? null : $this->mapInto($country);
     }

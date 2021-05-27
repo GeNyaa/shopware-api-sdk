@@ -26,9 +26,12 @@ class CategoryEndpoint extends EndpointAbstract
         });
     }
 
+    /**
+     * @throws ShopwareApiException
+     */
     public function first(): ?Category
     {
-        $category = parent::first();
+        $category = $this->restFirst();
 
         return is_null($category) ? null : $this->mapInto($category);
     }

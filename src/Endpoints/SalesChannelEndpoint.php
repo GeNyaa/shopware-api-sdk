@@ -27,7 +27,7 @@ class SalesChannelEndpoint extends EndpointAbstract
 
     public  function first(): ?SalesChannel
     {
-        $salesChannel = parent::first();
+        $salesChannel = $this->restFirst();
 
         return is_null($salesChannel) ? null : $this->mapInto($salesChannel);
     }

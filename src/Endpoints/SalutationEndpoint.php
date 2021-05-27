@@ -27,7 +27,7 @@ class SalutationEndpoint extends EndpointAbstract
 
     public  function first(): ?Salutation
     {
-        $salutation = parent::first();
+        $salutation = $this->restFirst();
 
         return is_null($salutation) ? null : $this->mapInto($salutation);
     }

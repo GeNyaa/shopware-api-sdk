@@ -29,7 +29,7 @@ class PropertyEndpoint extends EndpointAbstract
 
     public function first(): ?Property
     {
-        $property = parent::first();
+        $property = $this->restFirst();
 
         if (is_null($property)) {
             return null;

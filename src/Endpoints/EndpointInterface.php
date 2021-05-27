@@ -17,6 +17,5 @@ interface EndpointInterface
 {
     public function parameters(Parameters $parameters): self;
     public function header(Header $header): self;
-    public function first();
     public function upsert(Collection $upsertable): Collection;
 }

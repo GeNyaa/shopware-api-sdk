@@ -24,9 +24,9 @@ class ManufacturerEndpoint extends EndpointAbstract
         });
     }
 
-    public  function first(): ?Manufacturer
+    public function first(): ?Manufacturer
     {
-        $manufacturer = parent::first();
+        $manufacturer = $this->restFirst();
 
         return is_null($manufacturer) ? null : $this->mapInto($manufacturer);
     }

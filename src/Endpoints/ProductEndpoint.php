@@ -27,6 +27,13 @@ class ProductEndpoint extends EndpointAbstract
         });
     }
 
+    public function first(): ?Product
+    {
+        $product = $this->restFirst();
+
+        return is_null($product) ? null : $this->mapInto($product);
+    }
+
     /**
      * @throws ShopwareApiException
      */
