@@ -123,7 +123,8 @@ class ShopwareApiClient
         $data = $response->json();
 
         $this->bearer = $data['access_token'] ?? null;
-        $this->expiresTime = $currentTime->addSeconds($data['expires_in'] ?? 0);
+        $seconds = $data['expires_in'] ?? 0;
+        $this->expiresTime = $currentTime->addSeconds($seconds - 60);
 
         return $this;
     }

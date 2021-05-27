@@ -39,7 +39,7 @@ class Property extends DtoAbstract
          }
 
          if (!is_null($this->options)) {
-             $property['options'] = $this->options;
+             $property['options'] = $this->options->toArray();
          }
 
          if (!is_null($this->translations)) {

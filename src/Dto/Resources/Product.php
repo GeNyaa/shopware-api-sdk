@@ -17,13 +17,13 @@ final class Product extends DtoAbstract
         public ?string $taxId,
         public ?PriceCollection $price,
         public ?string $productNumber,
-        public int $stock,
-        public bool $active,
+        public ?int $stock,
+        public ?bool $active,
         public int|float|null $purchaseUnit = null,
         public ?string $manufacturerId = null,
-        public ?Collection $categories = null,
+        public ?CategoryCollection $categories = null,
         public ?CustomFields $customFields = null,
-        public ?Collection $properties = null,
+        public ?PropertyOptionCollection $properties = null,
     )
     {
     }
@@ -33,16 +33,22 @@ final class Product extends DtoAbstract
         $product = [
             'id' => $this->id,
             'name' => $this->name,
-            'stock' => $this->stock,
-            'active' => $this->active,
         ];
+
+        if (!is_null($this->active)) {
+            $product['active'] = $this->active;
+        }
+
+        if (!is_null($this->stock)) {
+            $product['stock'] = $this->stock;
+        }
 
         if (!is_null($this->taxId)) {
             $product['taxId'] = $this->taxId;
         }
 
         if (!is_null($this->price)) {
-            $product['price'] = $this->price;
+            $product['price'] = $this->price->toArray();
         }
 
         if (!is_null($this->productNumber)) {
@@ -54,15 +60,15 @@ final class Product extends DtoAbstract
         }
 
         if (!is_null($this->categories)) {
-            $product['categories'] = $this->categories;
+            $product['categories'] = $this->categories->toArray();
         }
 
         if (!is_null($this->customFields)) {
-            $product['customFields'] = $this->customFields;
+            $product['customFields'] = $this->customFields->toArray();
         }
 
         if (!is_null($this->properties)) {
-            $product['properties'] = $this->properties;
+            $product['properties'] = $this->properties->toArray();
         }
 
         if (!is_null($this->manufacturerId)) {

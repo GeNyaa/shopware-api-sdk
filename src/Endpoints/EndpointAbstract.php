@@ -120,13 +120,11 @@ abstract class EndpointAbstract implements EndpointInterface
      */
     public function upsert(Collection $upsertable): Collection
     {
-        $return = $upsertable;
-
         $data = [
             sprintf('write-%s', $this->resource) => [
                 'entity' => $this->resource,
                 'action' => 'upsert',
-                'payload' => $upsertable
+                'payload' => $upsertable->toArray(),
             ]
         ];
 
@@ -136,7 +134,7 @@ abstract class EndpointAbstract implements EndpointInterface
             throw new ShopwareApiException($response->body());
         }
 
-        return $return;
+        return $upsertable;
     }
 
     /**

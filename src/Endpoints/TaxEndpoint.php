@@ -20,9 +20,7 @@ class TaxEndpoint extends EndpointAbstract
      */
     public function all(): TaxCollection
     {
-        return (new TaxCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new TaxCollection())->merge($this->restAll());
     }
 
     public  function first(): ?Tax

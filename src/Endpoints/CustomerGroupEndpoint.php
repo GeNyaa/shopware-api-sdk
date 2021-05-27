@@ -21,9 +21,7 @@ class CustomerGroupEndpoint extends EndpointAbstract
      */
     public function all(): CustomerGroupCollection
     {
-        return (new CustomerGroupCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new CustomerGroupCollection())->merge($this->restAll());
     }
 
     public function first(): ?CustomerGroup

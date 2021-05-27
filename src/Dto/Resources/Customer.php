@@ -59,11 +59,11 @@ final class Customer extends DtoAbstract
         }
 
         if (!is_null($this->addresses)) {
-            $customer['addresses'] = $this->addresses;
+            $customer['addresses'] = $this->addresses->toArray();
         }
 
         if (!is_null($this->vatIds)) {
-            $customer['vatIds'] = $this->vatIds;
+            $customer['vatIds'] = $this->vatIds->toArray();
         }
 
         return $customer;

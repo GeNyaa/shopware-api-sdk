@@ -20,9 +20,7 @@ class SalutationEndpoint extends EndpointAbstract
      */
     public function all(): SalutationCollection
     {
-        return (new SalutationCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new SalutationCollection())->merge($this->restAll());
     }
 
     public  function first(): ?Salutation

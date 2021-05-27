@@ -21,9 +21,7 @@ class LanguageEndpoint extends EndpointAbstract
      */
     public function all(): LanguageCollection
     {
-        return (new LanguageCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new LanguageCollection())->merge($this->restAll());
     }
 
     public function first(): ?Language

@@ -8,6 +8,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 use GeNyaa\ShopwareApiSdk\Dto\Parameters;
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Property;
 use GeNyaa\ShopwareApiSdk\Dto\Resources\PropertyCollection;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\PropertyOptionCollection;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 use Illuminate\Support\Collection;
 
@@ -22,9 +23,7 @@ class PropertyEndpoint extends EndpointAbstract
      */
     public function all(): PropertyCollection
     {
-        return (new PropertyCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new PropertyCollection())->merge($this->restAll());
     }
 
     public function first(): ?Property
@@ -84,7 +83,7 @@ class PropertyEndpoint extends EndpointAbstract
             $property['description'],
             $property['position'],
             $property['filterable'],
-            $property['options'],
+            new PropertyOptionCollection($property['options']),
             $property['translations'],
         );
     }

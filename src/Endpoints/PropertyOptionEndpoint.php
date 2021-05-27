@@ -20,9 +20,7 @@ class PropertyOptionEndpoint extends EndpointAbstract
      */
     public function all(): PropertyOptionCollection
     {
-        return (new PropertyOptionCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new PropertyOptionCollection())->merge($this->restAll());
     }
 
     public function first(): ?PropertyOption

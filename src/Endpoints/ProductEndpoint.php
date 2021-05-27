@@ -6,8 +6,11 @@ declare(strict_types=1);
 namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
+use GeNyaa\ShopwareApiSdk\Dto\Resources\CategoryCollection;
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Product;
 use GeNyaa\ShopwareApiSdk\Dto\Resources\ProductCollection;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\PropertyOptionCollection;
+use GeNyaa\ShopwareApiSdk\Dto\Variables\CustomFields;
 use GeNyaa\ShopwareApiSdk\Exceptions\ShopwareApiException;
 use Illuminate\Support\Collection;
 
@@ -22,9 +25,7 @@ class ProductEndpoint extends EndpointAbstract
      */
     public function all(): ProductCollection
     {
-        return (new ProductCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new ProductCollection())->merge($this->restAll());
     }
 
     public function first(): ?Product
@@ -48,16 +49,16 @@ class ProductEndpoint extends EndpointAbstract
         return new Product(
             $product['id'],
             $product['name'],
-            $product['taxId'],
-            $product['price'],
-            $product['productNumber'],
-            $product['stock'],
-            $product['active'],
-            $product['purchaseUnit'],
-            $product['manufacturerId'],
-            collect($product['categories']),
-            $product['customFields'],
-            collect($product['properties']),
+            $product['taxId'] ?? null,
+            $product['price'] ?? null,
+            $product['productNumber'] ?? null,
+            $product['stock'] ?? null,
+            $product['active'] ?? null,
+            $product['purchaseUnit'] ?? null,
+            $product['manufacturerId'] ?? null,
+            new CategoryCollection($product['categories'] ?? null),
+            new CustomFields($product['customFields'] ?? []),
+            new PropertyOptionCollection($product['properties'] ?? null),
         );
     }
 }

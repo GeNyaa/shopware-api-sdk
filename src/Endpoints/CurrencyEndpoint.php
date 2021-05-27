@@ -21,9 +21,7 @@ class CurrencyEndpoint extends EndpointAbstract
      */
     public function all(): CurrencyCollection
     {
-        return (new CurrencyCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new CurrencyCollection())->merge($this->restAll());
     }
 
     public function first(): ?Currency

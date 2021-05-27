@@ -21,9 +21,7 @@ class CountryEndpoint extends EndpointAbstract
      */
     public function all(): CountryCollection
     {
-        return (new CountryCollection())->merge($this->restAll())->map(function (array $country) {
-            return $this->mapInto($country);
-        });
+        return (new CountryCollection())->merge($this->restAll());
     }
 
     public function first(): ?Country

@@ -19,9 +19,7 @@ class ManufacturerEndpoint extends EndpointAbstract
      */
     public function all(): ManufacturerCollection
     {
-        return (new ManufacturerCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new ManufacturerCollection())->merge($this->restAll());
     }
 
     public function first(): ?Manufacturer

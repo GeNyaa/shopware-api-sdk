@@ -20,9 +20,7 @@ class SalesChannelEndpoint extends EndpointAbstract
      */
     public function all(): SalesChannelCollection
     {
-        return (new SalesChannelCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new SalesChannelCollection())->merge($this->restAll());
     }
 
     public  function first(): ?SalesChannel

@@ -19,9 +19,7 @@ class CustomerAddressEndpoint extends EndpointAbstract
      */
     public function all(): CustomerAddressCollection
     {
-        return (new CustomerAddressCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new CustomerAddressCollection())->merge($this->restAll());
     }
 
     public function first(): ?CustomerAddress

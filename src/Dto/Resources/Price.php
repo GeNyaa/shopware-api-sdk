@@ -14,6 +14,7 @@ final class Price extends DtoAbstract
         public ?string $currencyId = null,
         public int|float|null $net = null,
         public int|float|null $gross = null,
+        public ?bool $linked = null,
     )
     {
     }
@@ -30,6 +31,10 @@ final class Price extends DtoAbstract
 
         if (!is_null($this->gross)) {
             $price['gross'] = $this->gross;
+        }
+
+        if (!is_null($this->linked)) {
+            $price['linked'] = $this->linked;
         }
 
         return $price;

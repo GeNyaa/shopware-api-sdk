@@ -20,9 +20,7 @@ class PaymentMethodEndpoint extends EndpointAbstract
      */
     public function all(): PaymentMethodCollection
     {
-        return (new PaymentMethodCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new PaymentMethodCollection())->merge($this->restAll());
     }
 
     public function first(): ?PaymentMethod

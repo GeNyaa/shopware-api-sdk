@@ -21,9 +21,7 @@ class CategoryEndpoint extends EndpointAbstract
      */
     public function all(): CategoryCollection
     {
-        return (new CategoryCollection())->merge($this->restAll())->map(function (array $category) {
-            return $this->mapInto($category);
-        });
+        return (new CategoryCollection())->merge($this->restAll());
     }
 
     /**
