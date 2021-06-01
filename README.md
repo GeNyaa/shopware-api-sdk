@@ -16,3 +16,53 @@ Initial client:
 ```php
 $client = app(\GeNyaa\ShopwareApiSdk\ShopwareApiClient::class);
 ```
+
+# Helper functions
+
+### `shopwareCollect(string $resource, mixed $value = null)`
+
+Creates a resource collection of Resource(s).
+
+Example usage:
+```php
+use GeNyaa\ShopwareApiSdk\Dto\Resources\Category;
+
+shopwareCollect(Category::class, []);
+```
+
+### `shopwareCustomFields(array $value = []): CustomFields`
+
+Creates a CustomFields class from array.
+
+Example usage:
+```php
+shopwareCustomFields([
+    'fieldName' => 'fieldValue',
+]);
+```
+
+### `shopwareParameters(array $value = []): Parameters`
+
+Creates a Parameters class from array.
+
+Example usage:
+```php
+shopwareParameters([
+    'parameterName' => 'parameterValue',
+]);
+```
+
+### `shopwareHeader(array $value = []): Header`
+
+Creates a Header class from array.
+
+Example usage:
+```php
+shopwareHeader([
+    'headerName' => 'headerValue',
+]);
+```
+
+### `shopwareUuid(): string`
+
+Generates a Uuid to Shopware spec.

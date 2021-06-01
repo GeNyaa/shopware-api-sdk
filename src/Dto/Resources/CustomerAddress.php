@@ -7,6 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Dto\Resources;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\DtoAbstract;
+use GeNyaa\ShopwareApiSdk\Dto\Variables\CustomFields;
 
 final class CustomerAddress extends DtoAbstract
 {
@@ -26,6 +27,7 @@ final class CustomerAddress extends DtoAbstract
         public ?string $department = null,
         public ?string $vatId = null,
         public ?string $customerId = null,
+        public ?CustomFields $customFields = null,
     )
     {
     }
@@ -69,6 +71,10 @@ final class CustomerAddress extends DtoAbstract
 
         if (!is_null($this->customerId)) {
             $customerAddress['customerId'] = $this->customerId;
+        }
+
+        if (!is_null($this->customFields)) {
+            $customerAddress['customFields'] = $this->customFields->toArray();
         }
 
         return $customerAddress;
