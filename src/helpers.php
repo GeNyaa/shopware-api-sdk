@@ -18,7 +18,9 @@ if (!function_exists('shopwareCollect')) {
      */
     function shopwareCollect(string $resource, mixed $value = null)
     {
-        return new $resource . 'Collection'($value);
+        $resource = $resource . 'Collection';
+
+        return new $resource($value);
     }
 }
 
