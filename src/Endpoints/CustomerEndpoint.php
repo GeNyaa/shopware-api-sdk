@@ -56,6 +56,7 @@ class CustomerEndpoint extends EndpointAbstract
             $customer['defaultPaymentMethodId'],
             $customer['defaultShippingAddressId'],
             vatIds: is_null($customer['vatIds']) ? null : collect($customer['vatIds']),
+            customFields: shopwareCustomFields($customer['customFields']),
         );
     }
 }

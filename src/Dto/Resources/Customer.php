@@ -7,6 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Dto\Resources;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\DtoAbstract;
+use GeNyaa\ShopwareApiSdk\Dto\Variables\CustomFields;
 use Illuminate\Support\Collection;
 
 final class Customer extends DtoAbstract
@@ -27,6 +28,7 @@ final class Customer extends DtoAbstract
         public ?string $defaultShippingAddressId = null,
         public ?CustomerAddressCollection $addresses = null,
         public ?Collection $vatIds = null,
+        public ?CustomFields $customFields = null,
     )
     {
     }
@@ -67,6 +69,10 @@ final class Customer extends DtoAbstract
 
         if (!is_null($this->vatIds)) {
             $customer['vatIds'] = $this->vatIds->toArray();
+        }
+
+        if (!is_null($this->customFields)) {
+            $customer['customFields'] = $this->customFields->toArray();
         }
 
         return $customer;
