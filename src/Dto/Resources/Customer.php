@@ -14,7 +14,7 @@ final class Customer extends DtoAbstract
     public function __construct(
         public string $id,
         public string $salutationId,
-        public string $company,
+        public ?string $company,
         public string $firstName,
         public string $lastName,
         public string $email,
@@ -36,7 +36,6 @@ final class Customer extends DtoAbstract
         $customer = [
             'id' => $this->id,
             'salutationId' => $this->salutationId,
-            'company' => $this->company,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
             'email' => $this->email,
@@ -45,6 +44,10 @@ final class Customer extends DtoAbstract
             'languageId' => $this->languageId,
             'customerNumber' => $this->customerNumber,
         ];
+
+        if (!is_null($this->company)) {
+            $customer['company'] = $this->company;
+        }
 
         if (!is_null($this->defaultBillingAddressId)) {
             $customer['defaultBillingAddressId'] = $this->defaultBillingAddressId;

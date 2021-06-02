@@ -44,7 +44,7 @@ class CustomerEndpoint extends EndpointAbstract
         return new Customer(
             $customer['id'],
             $customer['salutationId'],
-            $customer['company'],
+            $customer['company'] ?? null,
             $customer['firstName'],
             $customer['lastName'],
             $customer['email'],
