@@ -21,7 +21,7 @@ class CustomFields implements Arrayable, Jsonable
         return $this->customFields[$key] ?? null;
     }
 
-    public function set(string $key, string $value): self
+    public function set(string $key, mixed $value): self
     {
         $this->customFields[$key] = $value;
 
