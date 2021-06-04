@@ -11,9 +11,10 @@ use GeNyaa\ShopwareApiSdk\Dto\Jsonable;
 class CustomFields implements Arrayable, Jsonable
 {
     public function __construct(
-        protected array $customFields = []
+        protected ?array $customFields = null
     )
     {
+        $this->customFields = is_null($this->customFields) ? [] : $this->customFields;
     }
 
     public function get(string $key): mixed

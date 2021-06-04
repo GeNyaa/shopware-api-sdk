@@ -25,7 +25,7 @@ if (!function_exists('shopwareCollect')) {
 }
 
 if (!function_exists('shopwareCustomFields')) {
-    function shopwareCustomFields(array $value = []): CustomFields
+    function shopwareCustomFields(?array $value = null): CustomFields
     {
         return new CustomFields($value);
     }
