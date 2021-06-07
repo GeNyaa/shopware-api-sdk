@@ -150,4 +150,7 @@ abstract class EndpointAbstract implements EndpointInterface
 
         return $resource;
     }
+
+    abstract public function first();
+    abstract public function all();
 }
