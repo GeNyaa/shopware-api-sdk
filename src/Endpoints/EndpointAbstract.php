@@ -22,6 +22,9 @@ abstract class EndpointAbstract implements EndpointInterface
 
     protected ?Header $header = null;
 
+    abstract public function first();
+    abstract public function all();
+
     public function __construct(
         protected ShopwareApiClient $client
     )
@@ -150,7 +153,4 @@ abstract class EndpointAbstract implements EndpointInterface
 
         return $resource;
     }
-
-    abstract public function first();
-    abstract public function all();
 }
