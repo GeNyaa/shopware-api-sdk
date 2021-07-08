@@ -7,6 +7,7 @@ namespace GeNyaa\ShopwareApiSdk\Endpoints;
 
 
 use GeNyaa\ShopwareApiSdk\Dto\Resources\CategoryCollection;
+use GeNyaa\ShopwareApiSdk\Dto\Resources\PriceCollection;
 use GeNyaa\ShopwareApiSdk\Dto\Resources\Product;
 use GeNyaa\ShopwareApiSdk\Dto\Resources\ProductCollection;
 use GeNyaa\ShopwareApiSdk\Dto\Resources\PropertyOptionCollection;
@@ -50,7 +51,7 @@ class ProductEndpoint extends EndpointAbstract
             $product['id'],
             $product['name'],
             $product['taxId'] ?? null,
-            $product['price'] ?? null,
+           (new PriceCollection($product['price'] ?? null))->mapPrices(),
             $product['productNumber'] ?? null,
             $product['stock'] ?? null,
             $product['active'] ?? null,

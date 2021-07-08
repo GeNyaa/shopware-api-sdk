@@ -12,8 +12,8 @@ final class Price extends DtoAbstract
 {
     public function __construct(
         public ?string $currencyId = null,
-        public int|float|null $net = null,
-        public int|float|null $gross = null,
+        public float|int|null $net = null,
+        public float|int|null $gross = null,
         public ?bool $linked = null,
     )
     {
